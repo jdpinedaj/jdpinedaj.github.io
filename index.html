@@ -94,6 +94,88 @@
 
   <section id="systems" class="section">
     <h2 class="section-title">Systems</h2>
+    <p class="lede">Four production systems. Each card shows how the system is put together and what keeps it safe. Hover a dotted term to find it in the diagram.</p>
+
+    <article class="card" id="aria">
+      <figure class="card-diagram" aria-label="ARIA architecture diagram"></figure>
+      <div>
+        <p class="kicker">Johnson &amp; Johnson, pharma</p>
+        <h3>ARIA, ARB Intake Verifier</h3>
+        <dl class="card-text">
+          <dt>Problem</dt>
+          <dd><span class="term" data-term="intake">It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams)</span>, reviews them against the enterprise standards library and returns a scored, fully cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.</dd>
+          <dt>Architecture</dt>
+          <dd><span class="term" data-term="agents">Four domain architect agents (Business, Technology, Information, Data Science &amp; AI)</span> run on a shared <span class="term" data-term="engine">quality-agent engine</span> orchestrated through <span class="term" data-term="graph">LangGraph state machines</span>, and only the domains the deck flags as architecturally impacted actually run.</dd>
+          <dd>The agents negotiate missing evidence over an <span class="term" data-term="a2a">A2A protocol</span> (batched star topology, each peer answers once instead of N-by-N) and revise their own findings with what comes back.</dd>
+          <dd>Reasoning is grounded in the LeanIX enterprise architecture inventory (<span class="term" data-term="neo4j">Neo4j graph backend</span>) plus a <span class="term" data-term="pgvector">pgvector store</span> over the standards library; the agents assess slide diagrams directly as multimodal image input.</dd>
+          <dt>Governance</dt>
+          <dd>Designed and implemented <span class="term" data-term="guardrails">19 production guardrails at every graph node</span>: prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run cost and token ceilings, among others. Every finding must cite catalog source IDs; citations are resolved against the catalog and ungrounded rows are dropped or flagged.</dd>
+          <dt>Outcome</dt>
+          <dd><span class="term" data-term="report">A review that took a reviewer a full working day now takes about ten minutes.</span></dd>
+        </dl>
+        <p class="stack">Python, LangGraph, LangChain, OpenAI Agents SDK, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, Neo4j, PostgreSQL + pgvector, SQLAlchemy, Docker</p>
+      </div>
+    </article>
+
+    <article class="card" id="eva">
+      <figure class="card-diagram" aria-label="EVA architecture diagram"></figure>
+      <div>
+        <p class="kicker">Iberia Airlines, aviation</p>
+        <h3>EVA, Enhanced Virtual Assistant</h3>
+        <dl class="card-text">
+          <dt>Problem</dt>
+          <dd>Development of EVA (Enhanced Virtual Assistant), a multi-agent conversational ecosystem powered by LLMs to automate Iberia's customer service operations.</dd>
+          <dt>Architecture</dt>
+          <dd>Designed, tuned and deployed <span class="term" data-term="models">OpenAI and AWS Bedrock models</span> for production-grade airline assistants handling check-in, cancellations, flight status, flight documentation and other customer processes.</dd>
+          <dd>Built modular, <span class="term" data-term="router">hexagonal-architecture-based agents</span> <span class="term" data-term="agents">(Check-in, Cancellation, Flight Status, Translator, Tone, Booking, Guardrail)</span> using LangChain and FastAPI with structured I/O through Pydantic schemas.</dd>
+          <dd>Integrated multiple <span class="term" data-term="apis">Iberia APIs</span> and implemented secure, scalable interaction via internal tools and <span class="term" data-term="mcp">custom MCP servers</span> for external system access.</dd>
+          <dt>Governance</dt>
+          <dd>Created <span class="term" data-term="guardrail">prompt-injection and data-exfiltration detectors</span> ensuring compliant and safe interactions.</dd>
+          <dt>Evaluation</dt>
+          <dd>Developed internal evaluation tools for LLM cost tracking, token efficiency, latency and output quality.</dd>
+        </dl>
+        <p class="stack">Python, LangChain, OpenAI, AWS Bedrock (Nova Pro), FastAPI, Pydantic, DynamoDB, structlog, pytest, GitLab CI/CD</p>
+      </div>
+    </article>
+
+    <article class="card" id="tpp">
+      <figure class="card-diagram" aria-label="TPP Text2SQL architecture diagram"></figure>
+      <div>
+        <p class="kicker">The People Platform, mobility analytics</p>
+        <h3>TPP Text2SQL</h3>
+        <dl class="card-text">
+          <dt>Problem</dt>
+          <dd>TPP Text2SQL: production conversational analytics platform over US foot-traffic and mobility data, letting business users run their own analyses in natural language instead of queueing for a data analyst who can write SQL.</dd>
+          <dt>Architecture</dt>
+          <dd>Four-stage hexagonal pipeline (<span class="term" data-term="extract">query extraction</span>, <span class="term" data-term="generate">context-aware SQL generation</span>, <span class="term" data-term="execute">secure execution</span>, <span class="term" data-term="transform">natural-language transformation</span>) with <span class="term" data-term="memory">session memory</span> and multi-turn follow-up resolution, plus <span class="term" data-term="faiss">FAISS semantic example selection</span> for few-shot SQL generation.</dd>
+          <dd>A case regression suite combining deterministic oracles with an LLM judge, pre-flight validation of extracted entities against the real catalogs, and every turn persisted to a <span class="term" data-term="audit">PostgreSQL audit table</span>.</dd>
+          <dd>Earlier work for the same client: scalable algorithms to map US mobility trends and identify home locations, an EMR-based processing pipeline over large geolocation datasets, and the first text2SQL agents (AWS Bedrock Titan, later OpenAI).</dd>
+          <dt>Governance</dt>
+          <dd>Defence in depth: <span class="term" data-term="guards">regex input guard, a parallel LLM safety classifier adding no perceptible latency, a hardened read-only SQL backstop</span>.</dd>
+          <dt>Auditability</dt>
+          <dd>Every turn persisted to a PostgreSQL audit table.</dd>
+        </dl>
+        <p class="stack">Python, LangChain, OpenAI, FAISS, LangSmith, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL), Gemini</p>
+      </div>
+    </article>
+
+    <article class="card" id="text2sql">
+      <figure class="card-diagram" aria-label="Enterprise Text2SQL architecture diagram"></figure>
+      <div>
+        <p class="kicker">Johnson &amp; Johnson, self-serve analytics</p>
+        <h3>Enterprise Text2SQL Agent</h3>
+        <dl class="card-text">
+          <dt>Problem</dt>
+          <dd>Enterprise Text2SQL Agent: self-serve natural-language querying of enterprise databases, so business users get answers without depending on a SQL-fluent data analyst.</dd>
+          <dt>Architecture</dt>
+          <dd><span class="term" data-term="agent">A single tool-calling agent</span> that discovers the schema at runtime, writes read-only SQL and recovers from its own errors by <span class="term" data-term="db">receiving database failures back as tool results</span>; onboarding a new database is a connection-string change, with zero schema-specific prompt engineering.</dd>
+          <dd>The agent depends only on <span class="term" data-term="llmport">LLMPort</span> and <span class="term" data-term="dbport">DatabasePort</span> contracts, so switching LLM vendor or database platform means writing an adapter.</dd>
+          <dt>Governance</dt>
+          <dd><span class="term" data-term="validation">read-only SQL validation, step budget and row caps</span>, plus a full offline regression suite driven by a <span class="term" data-term="mock">scripted mock LLM</span> (no API spend).</dd>
+        </dl>
+        <p class="stack">Python, Azure OpenAI, LangChain, SQLAlchemy, Pydantic, structlog, pytest</p>
+      </div>
+    </article>
   </section>
 
   <section id="governance" class="section">
