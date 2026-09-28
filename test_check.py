@@ -65,6 +65,10 @@ class LinkChecks(unittest.TestCase):
     def test_external_links_only_http(self):
         self.assertEqual(check.external_links(self.HTML), ["https://example.com/a"])
 
+    def test_external_links_ignore_link_tags(self):
+        html = '<link rel="preconnect" href="https://fonts.gstatic.com"><a href="https://example.com/b">b</a>'
+        self.assertEqual(check.external_links(html), ["https://example.com/b"])
+
     def test_head_falls_back_to_get(self):
         calls = []
 

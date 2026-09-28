@@ -55,7 +55,7 @@ def missing_anchors(html: str) -> list[str]:
 
 def external_links(html: str) -> list[str]:
     seen: list[str] = []
-    for url in re.findall(r'href="(https?://[^"]+)"', html):
+    for url in re.findall(r'<a\s[^>]*href="(https?://[^"]+)"', html):
         if url not in seen:
             seen.append(url)
     return seen
