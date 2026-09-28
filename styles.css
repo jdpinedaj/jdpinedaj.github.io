@@ -305,7 +305,7 @@ main {
 
 /* Diagrams */
 
-.diagram { font-family: var(--font-mono); font-size: 11px; }
+.diagram { font-family: var(--font-mono); font-size: 13px; }
 .diagram .node rect {
   fill: var(--surface-soft);
   stroke: var(--line);
@@ -337,7 +337,8 @@ main {
 }
 .diagram .store rect { rx: 4; }
 .diagram .hub circle { fill: var(--accent); }
-.diagram .muted { fill: var(--muted); font-size: 10px; }
+.diagram .hub.is-active .edge, .diagram .hub:hover .edge { stroke: var(--accent); }
+.diagram .muted { fill: var(--muted); font-size: 11px; }
 .diagram #arrow path { fill: var(--muted); }
 
 /* Governance */
