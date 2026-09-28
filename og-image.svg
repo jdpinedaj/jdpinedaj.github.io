@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Juan Pineda-Jaramillo, PhD. AI / LLM Engineer.">
+  <rect width="1200" height="630" fill="#f6f1ea"/>
+  <rect x="0" y="0" width="14" height="630" fill="#c2531c"/>
+  <text x="80" y="150" font-family="'IBM Plex Mono', Consolas, monospace" font-size="24" letter-spacing="4" fill="#c2531c">AI / LLM ENGINEER</text>
+  <text x="80" y="250" font-family="'Newsreader', Georgia, 'Times New Roman', serif" font-size="76" font-weight="600" fill="#1c1a17">Juan Pineda-Jaramillo, PhD</text>
+  <text x="80" y="330" font-family="'Inter', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="34" fill="#1c1a17">Production multi-agent systems, RAG, and the</text>
+  <text x="80" y="376" font-family="'Inter', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="34" fill="#1c1a17">governance layer that makes them safe enough</text>
+  <text x="80" y="422" font-family="'Inter', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="34" fill="#1c1a17">for regulated enterprise use.</text>
+  <text x="80" y="510" font-family="'Inter', 'Segoe UI', Helvetica, Arial, sans-serif" font-size="26" fill="#5f5a52">Johnson &amp; Johnson  |  Iberia Airlines  |  The People Platform</text>
+  <text x="80" y="574" font-family="'IBM Plex Mono', Consolas, monospace" font-size="22" letter-spacing="2" fill="#5f5a52">jdpinedaj.github.io</text>
+</svg>
