@@ -464,6 +464,7 @@ main {
   .grid-3 { grid-template-columns: 1fr; }
   .engagements li { grid-template-columns: 1fr; gap: 4px; }
   .timeline-item { flex: 0 0 132px; }
+  .site-header { position: static; }
   .section { padding-top: 40px; }
 }
 
