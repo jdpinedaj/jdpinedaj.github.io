@@ -412,14 +412,73 @@
 
   <section id="governance" class="section">
     <h2 class="section-title">Governance</h2>
+    <p class="lede">Anyone can wire up LangGraph. The part that is hard to claim is what keeps it safe in a regulated environment.</p>
+    <div class="grid-3">
+      <div>
+        <h3>Guardrails</h3>
+        <ul>
+          <li>Prompt-injection detection, regex and semantic</li>
+          <li>PII/PHI redaction with Presidio and spaCy</li>
+          <li>Data-exfiltration and system-prompt-leakage blocking</li>
+          <li>Schema and citation validation</li>
+          <li>Per-run cost and token ceilings, model-version pinning</li>
+          <li>Immutable hashed audit trails</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Evaluation</h3>
+        <ul>
+          <li>Ground-truth eval harnesses</li>
+          <li>Deterministic oracles combined with LLM-as-judge</li>
+          <li>Adversarial red-team corpora</li>
+          <li>Offline regression suites driven by mock LLMs</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Observability</h3>
+        <ul>
+          <li>Tracing with Arize Phoenix, OpenTelemetry and LangSmith</li>
+          <li>Per-run token, latency and cost tracking</li>
+          <li>Structured logging, containerised FastAPI services, Kubernetes and Helm</li>
+        </ul>
+      </div>
+    </div>
   </section>
 
   <section id="track-record" class="section">
     <h2 class="section-title">Track record</h2>
+    <p class="lede">Fourteen years of applied machine learning, from transport engineering in Colombia to agentic systems in pharma. The AI work sits on a long habit of shipping models that operations people depend on.</p>
+    <ul class="timeline">
+      <li class="timeline-item"><span class="year">2011</span><span class="label">Civil engineering, Colombia</span></li>
+      <li class="timeline-item"><span class="year">2013</span><span class="label">Transport engineering, Medell&iacute;n public agencies</span></li>
+      <li class="timeline-item"><span class="year">2017</span><span class="label">PhD, applied ML, Valencia</span></li>
+      <li class="timeline-item"><span class="year">2019</span><span class="label">Rail and freight ML, Luxembourg</span></li>
+      <li class="timeline-item"><span class="year">2021</span><span class="label">Mining and retail, Chile</span></li>
+      <li class="timeline-item"><span class="year">2022</span><span class="label">Finance and HR tech</span></li>
+      <li class="timeline-item"><span class="year">2023</span><span class="label">Mobility analytics and Text2SQL, US</span></li>
+      <li class="timeline-item"><span class="year">2024</span><span class="label">Aviation, Iberia multi-agent assistant</span></li>
+      <li class="timeline-item"><span class="year">2025</span><span class="label">Pharma, J&amp;J agentic systems</span></li>
+    </ul>
+    <p class="hero-note">In order, not to scale.</p>
+    <ul class="engagements">
+      <li><span>Codelco, Chile</span><span>Recommendation system and mixed linear programming model to optimise operation of the Chuquicamata mine; Kedro pipelines on Azure Databricks.</span></li>
+      <li><span>Falabella.com, Chile</span><span>Collaborative-filtering recommendation system with an automated pipeline from warehouse extraction to model deployment.</span></li>
+      <li><span>Pirani Risk, Colombia</span><span>Anti-money-laundering product using PCA and Birch clustering over bank clients.</span></li>
+      <li><span>Energage, US</span><span>Customer churn prediction model informing retention decisions.</span></li>
+      <li><span>CFL Multimodal, Luxembourg</span><span>ML models predicting disruptions in rail intermodal operations across EU nations, with MLOps pipelines.</span></li>
+      <li><span>MetroValencia and Logitren, Spain</span><span>Energy consumption prediction and optimisation for metro and freight trains.</span></li>
+      <li><span>Government of Antioquia and Medell&iacute;n, Colombia</span><span>Railway feasibility studies and the transport chapter of the regional development plan.</span></li>
+    </ul>
   </section>
 
   <section id="research" class="section">
     <h2 class="section-title">Research</h2>
+    <p class="lede">PhD in applied machine learning, Universitat Polit&egrave;cnica de Val&egrave;ncia, cum laude. Postdoc at the University of Luxembourg. 56 peer-reviewed publications.</p>
+    <ul class="pubs">
+      <li><a href="https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&amp;hl=en">Google Scholar profile</a></li>
+      <li><a href="https://ieeexplore.ieee.org/abstract/document/10241468">Tourist satisfaction and transport systems (IEEE)</a></li>
+      <li><a href="https://doi.org/10.1016/j.trpro.2023.02.188">Urban metro satisfaction, topic modelling (Transportation Research Procedia)</a></li>
+    </ul>
   </section>
 
   <section id="contact" class="section contact">

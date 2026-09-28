@@ -377,7 +377,8 @@ main {
   padding-bottom: 8px;
 }
 .timeline-item {
-  flex: 1 0 128px;
+  flex: 1 1 0;
+  min-width: 100px;
   position: relative;
   padding: 22px 12px 0 0;
 }
@@ -462,6 +463,7 @@ main {
   .card-diagram { position: static; }
   .grid-3 { grid-template-columns: 1fr; }
   .engagements li { grid-template-columns: 1fr; gap: 4px; }
+  .timeline-item { flex: 0 0 132px; }
   .section { padding-top: 40px; }
 }
 
