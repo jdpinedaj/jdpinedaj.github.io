@@ -5,15 +5,26 @@ Reads the tool call as JSON on stdin. Exit 0 lets it through; exit 2 blocks it a
 stderr message is shown to the model. check.py enforces the same rule on the whole
 repository at check time; this hook catches it at write time.
 
+Files outside the project (memory, scratchpad, other repos) are not this repo's business
+and pass untouched.
+
 Limit: only Edit and Write go through this hook. Content written via a bash heredoc is
 caught later by the post-edit hook or by check.py.
 """
 from __future__ import annotations
 
 import json
+import os
 import sys
 
 EM_DASH = chr(0x2014)
+
+
+def outside_project(path: str) -> bool:
+    root = os.environ.get("CLAUDE_PROJECT_DIR", "").rstrip("/")
+    if not root or not path.startswith("/"):
+        return False
+    return not (path == root or path.startswith(root + "/"))
 
 
 def main() -> int:
@@ -23,6 +34,8 @@ def main() -> int:
         return 0
     tool_input = call.get("tool_input") or {}
     path = str(tool_input.get("file_path", ""))
+    if outside_project(path):
+        return 0
     text = tool_input.get("content") if "content" in tool_input else tool_input.get("new_string", "")
     if not text or EM_DASH not in text:
         return 0

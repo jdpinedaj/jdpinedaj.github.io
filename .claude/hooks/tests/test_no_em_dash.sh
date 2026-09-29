@@ -18,6 +18,13 @@ line ${dash} two"
 check 0 content "one - two, three: four (five)"
 check 0 new_string "en dash is fine: 2011$(printf '\xe2\x80\x93')2026"
 check 0 content ""
+# Files outside the project are not this repo's business.
+payload=$(python3 -c 'import json,sys; print(json.dumps({"tool_input":{"file_path":"/home/juanp/.claude/memory/MEMORY.md","content":sys.argv[1]}}))' "a ${dash} b")
+printf '%s' "$payload" | CLAUDE_PROJECT_DIR="$root" python3 "$here/no_em_dash.py" >/dev/null 2>&1; got=$?
+if [ "$got" -eq 0 ]; then pass=$((pass+1)); else fail=$((fail+1)); echo "FAIL (want 0 got $got): em-dash outside the project"; fi
+payload=$(python3 -c 'import json,sys; print(json.dumps({"tool_input":{"file_path":sys.argv[2],"content":sys.argv[1]}}))' "a ${dash} b" "$root/README.md")
+printf '%s' "$payload" | CLAUDE_PROJECT_DIR="$root" python3 "$here/no_em_dash.py" >/dev/null 2>&1; got=$?
+if [ "$got" -eq 2 ]; then pass=$((pass+1)); else fail=$((fail+1)); echo "FAIL (want 2 got $got): em-dash inside the project"; fi
 printf 'not json' | python3 "$here/no_em_dash.py" >/dev/null 2>&1; [ $? -eq 0 ] && pass=$((pass+1)) || { fail=$((fail+1)); echo "FAIL: malformed stdin should be allowed"; }
 
 # post-edit.sh runs the offline checks only for the page, the sources and the checker.
