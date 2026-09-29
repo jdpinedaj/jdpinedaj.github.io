@@ -1,3 +1,10 @@
 __pycache__/
 shots/
 .superpowers/
+TODO.md
+
+# Local assistant overrides and inbox (not shared)
+.claude/settings.local.json
+.claude/incoming_meetings/
+.claude/agent-memory-local/
+CLAUDE.local.md
