@@ -8,17 +8,17 @@ Edit index.html to match this file, never the other way round.
 
 ## ARIA (pitch bank Tier 2, Tier 3, CV master)
 
-ARIA automates J&J's Architecture Review Board. Four domain architect agents (Business, Technology, Information, Data Science & AI) run on a shared quality-agent engine orchestrated through LangGraph state machines, and only the domains the deck flags as architecturally impacted actually run. The agents negotiate missing evidence over an A2A protocol (batched star topology, each peer answers once instead of N-by-N) and revise their own findings with what comes back. Reasoning is grounded in the LeanIX enterprise architecture inventory (JSON retrieval in production, a Neo4j text-to-Cypher retriever built and parked) plus a pgvector store over the standards library; the agents assess slide diagrams directly as multimodal image input. Every finding is asked to cite catalog source IDs; citations are resolved against the catalog and unresolved ones are flagged. A review that took a reviewer a full working day now takes about ten minutes.
+ARIA automates J&J's Architecture Review Board. Four domain architect agents (Business, Technology, Information, Data Science & AI) run on a shared quality-agent engine orchestrated through LangGraph state machines, and only the domains the deck flags as architecturally impacted actually run. The agents negotiate missing evidence over an A2A protocol (batched star topology, each peer answers once instead of N-by-N) and revise their own findings with what comes back. Reasoning is grounded in the LeanIX enterprise architecture inventory (Neo4j graph backend, text-to-Cypher retrieval) plus a pgvector store over the standards library; the agents assess slide diagrams directly as multimodal image input. Every finding cites catalog source IDs; citations are resolved against the catalog and unresolved ones are flagged. A review that took a reviewer a full working day now takes about ten minutes.
 
-ARIA, ARB Intake Verifier: multi-agent system that automates J&J's Architecture Review Board. It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams), reviews them against the enterprise standards library and returns a scored, source-cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.
+ARIA, ARB Intake Verifier: multi-agent system that automates J&J's Architecture Review Board. It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams), reviews them against the enterprise standards library and returns a scored, fully cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.
 
 Multi-Agent Architecture: Four domain architect agents (Business, Technology, Information, Data Science & AI) running on a shared quality-agent engine, orchestrated through a LangGraph state machine, with an in-process agent-to-agent (A2A) protocol in which each peer answers once and agents revise their findings with the evidence returned. Built on LangGraph and LangChain.
 
-LLM Safety Framework: Designed and implemented a 19-guardrail framework applied at graph-node boundaries and targeted points, non-blocking by design (warn and audit, human in the loop): prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run LLM-call and token ceilings, SHA-256 hashed audit trail, among others.
+LLM Safety Framework: Designed and implemented 19 production guardrails at graph-node boundaries and targeted points, non-blocking by design (warn and audit, human in the loop): prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run LLM-call and token ceilings, SHA-256 hashed audit trail, among others.
 
 Engineering & Delivery: Async FastAPI service with PostgreSQL and Alembic, connectors for SharePoint, LeanIX and Confluence, Arize Phoenix / OpenTelemetry tracing with per-call cost tracking, a run-consistency judge, and an offline regression suite of about 590 tests driven by mock LLMs.
 
-Tech stack: Python, LangGraph, LangChain, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, PostgreSQL + pgvector, Neo4j, SQLAlchemy, Alembic, Docker, Helm
+Tech stack: Python, LangGraph, LangChain, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, Neo4j, PostgreSQL + pgvector, SQLAlchemy, Alembic, Docker, Kubernetes, Helm
 
 ## EVA (CV master Iberia block, pitch bank)
 
@@ -44,13 +44,13 @@ Pipeline Architecture: Four-stage hexagonal pipeline (query extraction, context-
 
 Defence-in-Depth Guardrails: A regex input guard, a parallel LLM safety classifier that adds no perceptible latency, and a read-only SQL validator that blocks DML/DDL, including writes hidden in CTEs; validated with a 25-case adversarial battery (injection, jailbreak, exfiltration, obfuscation).
 
-Quality & Auditability: A 301-case regression suite (301/301 passing) combining deterministic oracles with an advisory LLM judge, an 18-case multi-turn follow-up corpus, pre-flight validation of extracted entities against catalog snapshots with fuzzy matching, and every turn persisted to a PostgreSQL audit table with per-stage timings.
+Quality & Auditability: A 301-case regression suite (301/301 passing) combining deterministic oracles with an LLM judge, an 18-case multi-turn follow-up corpus, pre-flight validation of extracted entities against the catalogs with fuzzy matching, and every turn persisted to a PostgreSQL audit table with per-stage timings.
 
 Earlier work for the same client: a device home-location pipeline over tens of millions of devices a month (night-time location clustering, confidence scoring, demographic enrichment), first on AWS EMR and later on GCP Dataproc, Cloud SQL and BigQuery, and the first text2SQL agents (AWS Bedrock Titan, later OpenAI).
 
 Numetrix (TPP) Text2SQL: production conversational analytics over US foot-traffic and mobility data. Four-stage hexagonal pipeline, session memory and multi-turn follow-up resolution, FAISS semantic example selection. Defence in depth: regex input guard, a parallel LLM safety classifier adding no perceptible latency, a read-only SQL validator. A 301-case regression suite (301/301) plus a 25-case adversarial battery, live and manual, not in CI. Every turn persisted to a PostgreSQL audit table. Tracing is Langfuse (LangSmith was removed in March).
 
-Tech stack: Python, LangChain, OpenAI, FAISS, Langfuse, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL, Compute Engine)
+Tech stack: Python, LangChain, OpenAI, FAISS, LangSmith, Langfuse, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL, Compute Engine)
 
 ## SRS Summarizer (CV master, pitch bank)
 

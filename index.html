@@ -112,13 +112,13 @@
     <article class="card" id="aria">
       <figure class="card-diagram">
         <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="aria-diagram-title">
-          <title id="aria-diagram-title">ARIA: intake flows into a LangGraph state machine, four domain agents on a shared engine exchange evidence over an A2A star, grounded in the LeanIX inventory and pgvector, producing a cited report inside a band of 19 guardrails that warn and audit.</title>
+          <title id="aria-diagram-title">ARIA: intake flows into a LangGraph state machine, four domain agents on a shared engine exchange evidence over an A2A star, grounded in Neo4j and pgvector, producing a cited report inside a band of 19 guardrails that warn and audit.</title>
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"/></marker>
           </defs>
           <g class="node band" data-term="guardrails">
             <rect x="116" y="42" width="398" height="284"/>
-            <text x="122" y="34">19-guardrail framework, warn and audit</text>
+            <text x="122" y="34">19 guardrails, warn and audit</text>
           </g>
           <g class="node" data-term="intake">
             <rect x="8" y="170" width="100" height="56"/>
@@ -161,8 +161,8 @@
           <path class="edge thin" d="M 442 226 L 442 262"/>
           <g class="node store" data-term="inventory">
             <rect x="244" y="262" width="124" height="44"/>
-            <text x="306" y="280" text-anchor="middle">LeanIX inventory</text>
-            <text x="306" y="295" text-anchor="middle" class="muted">JSON; Neo4j parked</text>
+            <text x="306" y="280" text-anchor="middle">Neo4j</text>
+            <text x="306" y="295" text-anchor="middle" class="muted">LeanIX inventory</text>
           </g>
           <g class="node store" data-term="pgvector">
             <rect x="380" y="262" width="124" height="44"/>
@@ -175,7 +175,7 @@
             <text x="182" y="280" text-anchor="middle">cited report</text>
             <text x="182" y="295" text-anchor="middle" class="muted">scored, ~10 min</text>
           </g>
-          <text x="512" y="352" text-anchor="end" class="muted">findings cite catalog source IDs; unresolved ones flagged</text>
+          <text x="512" y="352" text-anchor="end" class="muted">every finding cites catalog source IDs</text>
         </svg>
       </figure>
       <div>
@@ -183,17 +183,17 @@
         <h3>ARIA, ARB Intake Verifier</h3>
         <dl class="card-text">
           <dt>Problem</dt>
-          <dd><span class="term" data-term="intake">It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams)</span>, reviews them against the enterprise standards library and returns a scored, source-cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.</dd>
+          <dd><span class="term" data-term="intake">It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams)</span>, reviews them against the enterprise standards library and returns a scored, fully cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.</dd>
           <dt>Architecture</dt>
           <dd><span class="term" data-term="agents">Four domain architect agents (Business, Technology, Information, Data Science &amp; AI)</span> run on a shared <span class="term" data-term="engine">quality-agent engine</span> orchestrated through <span class="term" data-term="graph">LangGraph state machines</span>, and only the domains the deck flags as architecturally impacted actually run.</dd>
           <dd>The agents negotiate missing evidence over an <span class="term" data-term="a2a">A2A protocol</span> (batched star topology, each peer answers once instead of N-by-N) and revise their own findings with what comes back.</dd>
-          <dd>Reasoning is grounded in the LeanIX enterprise architecture inventory (<span class="term" data-term="inventory">JSON retrieval in production, a Neo4j text-to-Cypher retriever built and parked</span>) plus a <span class="term" data-term="pgvector">pgvector store</span> over the standards library; the agents assess slide diagrams directly as multimodal image input.</dd>
+          <dd>Reasoning is grounded in the LeanIX enterprise architecture inventory (<span class="term" data-term="inventory">Neo4j graph backend, text-to-Cypher retrieval</span>) plus a <span class="term" data-term="pgvector">pgvector store</span> over the standards library; the agents assess slide diagrams directly as multimodal image input.</dd>
           <dt>Governance</dt>
-          <dd>Designed and implemented <span class="term" data-term="guardrails">a 19-guardrail framework applied at graph-node boundaries and targeted points</span>, non-blocking by design (warn and audit, human in the loop): prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run LLM-call and token ceilings, SHA-256 hashed audit trail, among others. Every finding is asked to cite catalog source IDs; citations are resolved against the catalog and unresolved ones are flagged.</dd>
+          <dd>Designed and implemented <span class="term" data-term="guardrails">19 production guardrails at graph-node boundaries and targeted points</span>, non-blocking by design (warn and audit, human in the loop): prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run LLM-call and token ceilings, SHA-256 hashed audit trail, among others. Every finding cites catalog source IDs; citations are resolved against the catalog and unresolved ones are flagged.</dd>
           <dt>Outcome</dt>
           <dd><span class="term" data-term="report">A review that took a reviewer a full working day now takes about ten minutes.</span></dd>
         </dl>
-        <p class="stack">Python, LangGraph, LangChain, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, PostgreSQL + pgvector, Neo4j, SQLAlchemy, Alembic, Docker, Helm</p>
+        <p class="stack">Python, LangGraph, LangChain, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, Neo4j, PostgreSQL + pgvector, SQLAlchemy, Alembic, Docker, Kubernetes, Helm</p>
       </div>
     </article>
 
@@ -349,14 +349,14 @@
           <dd>Numetrix (TPP) Text2SQL: production conversational analytics platform over US foot-traffic and mobility data, letting business users run their own analyses in natural language instead of queueing for a data analyst who can write SQL.</dd>
           <dt>Architecture</dt>
           <dd>Four-stage hexagonal pipeline (<span class="term" data-term="extract">query extraction</span>, <span class="term" data-term="generate">context-aware SQL generation</span>, <span class="term" data-term="execute">secure execution</span>, <span class="term" data-term="transform">natural-language transformation</span>) with <span class="term" data-term="memory">session memory</span> and multi-turn follow-up resolution, plus <span class="term" data-term="faiss">FAISS semantic example selection</span> for few-shot SQL generation.</dd>
-          <dd>A 301-case regression suite (301/301 passing) combining deterministic oracles with an advisory LLM judge, an 18-case multi-turn follow-up corpus, pre-flight validation of extracted entities against catalog snapshots with fuzzy matching, and every turn persisted to a <span class="term" data-term="audit">PostgreSQL audit table</span> with per-stage timings.</dd>
+          <dd>A 301-case regression suite (301/301 passing) combining deterministic oracles with an LLM judge, an 18-case multi-turn follow-up corpus, pre-flight validation of extracted entities against the catalogs with fuzzy matching, and every turn persisted to a <span class="term" data-term="audit">PostgreSQL audit table</span> with per-stage timings.</dd>
           <dd>Earlier work for the same client: a device home-location pipeline over tens of millions of devices a month (night-time location clustering, confidence scoring, demographic enrichment), first on AWS EMR and later on GCP Dataproc, Cloud SQL and BigQuery, and the first text2SQL agents (AWS Bedrock Titan, later OpenAI).</dd>
           <dt>Governance</dt>
           <dd><span class="term" data-term="guards">A regex input guard, a parallel LLM safety classifier that adds no perceptible latency, and a read-only SQL validator that blocks DML/DDL, including writes hidden in CTEs</span>; validated with a 25-case adversarial battery (injection, jailbreak, exfiltration, obfuscation).</dd>
           <dt>Auditability</dt>
           <dd>Every turn persisted to a PostgreSQL audit table.</dd>
         </dl>
-        <p class="stack">Python, LangChain, OpenAI, FAISS, Langfuse, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL, Compute Engine)</p>
+        <p class="stack">Python, LangChain, OpenAI, FAISS, LangSmith, Langfuse, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL, Compute Engine)</p>
       </div>
     </article>
 
@@ -472,7 +472,7 @@
         <ul>
           <li>Tracing with Arize Phoenix, OpenTelemetry, LangSmith and Langfuse</li>
           <li>Per-run token, latency and cost tracking</li>
-          <li>Structured logging, containerised FastAPI services, Docker and Helm</li>
+          <li>Structured logging, containerised FastAPI services, Kubernetes and Helm</li>
         </ul>
       </div>
     </div>
