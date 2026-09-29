@@ -36,8 +36,12 @@ layout, tokens, metadata and out-of-scope items.
 
 ## How to work here
 
-- Work on a branch; `main` only receives merges and is what Pages serves. A hook
-  refuses edits and commits on `main`. Deploy = `/deploy`.
+- Branch flow: `main` (served by Pages) <- `dev` (integration) <- working branches
+  `feature/`, `bugfix/`, `docs/`, `chore/` created from `dev`. Every edit goes on a
+  working branch, is merged into `dev`, and the working branch is deleted. `dev` goes
+  to `main` only after asking Juan. A hook refuses edits and commits on `main` and
+  `dev`, and refuses any merge on `main` other than `git merge --ff-only dev`.
+  Deploy = `/deploy`. Details in `rules/git-workflow.md`.
 - Commits: plain subject that says what changed, no tool attribution, no trailers.
 - Juan writes in Spanish; answer in Spanish. Page, code, commits and docs in English.
 - Path-scoped conventions load from `rules/` when you open the matching file.

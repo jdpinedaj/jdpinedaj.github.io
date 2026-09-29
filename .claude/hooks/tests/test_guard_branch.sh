@@ -22,8 +22,22 @@ check_cmd 2 main 'git commit -m "Fix"'
 check_cmd 2 master 'git commit -q -m "Fix"'
 check_cmd 2 main 'git add -u && git commit -m "Fix"'
 check_cmd 0 chore/internal-structure 'git commit -m "Fix"'
-check_cmd 0 main 'git merge --ff-only chore/x'
-check_cmd 0 main 'git switch -c fix/topic'
+# main only receives a fast-forward of dev.
+check_cmd 0 main 'git merge --ff-only dev'
+check_cmd 0 main 'git switch main && git merge --ff-only dev'
+check_cmd 2 main 'git merge --ff-only chore/x'
+check_cmd 2 main 'git merge dev'
+check_cmd 2 main 'git merge --no-ff dev'
+check_cmd 0 main 'git switch -c fix/topic dev'
+# dev refuses commits and edits, accepts merges of working branches.
+check_cmd 2 dev 'git commit -m "Fix"'
+check_cmd 0 dev 'git merge --ff-only feature/x'
+check_cmd 0 dev 'git merge --no-ff feature/x'
+check_cmd 0 dev 'git branch -d feature/x'
+check 2 dev "$root/index.html"
+check 2 dev "$root/.claude/CLAUDE.md"
+check 0 dev "$root/.claude/TODO.md"
+check 0 dev /tmp/claude-1000/scratchpad/notes.md
 check_cmd 0 main 'git push origin main'
 check_cmd 0 main 'git status'
 check_cmd 0 main 'python3 check.py'
@@ -40,7 +54,8 @@ check 2 main "$root/shots/shoot.js"
 check 0 main "$root/.claude/settings.local.json"
 # Working branches are free.
 check 0 chore/internal-structure "$root/index.html"
-check 0 fix/theme-color "$root/styles.css"
+check 0 feature/photo "$root/index.html"
+check 0 bugfix/theme-color "$root/styles.css"
 check 0 docs/readme "$root/README.md"
 # Outside the repository is fine even on main.
 check 0 main /tmp/claude-1000/scratchpad/notes.md

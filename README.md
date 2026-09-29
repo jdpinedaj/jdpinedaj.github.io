@@ -49,4 +49,6 @@ pull request, and the full link check once a week.
 ## Deploy
 
 GitHub Pages serves the `main` branch root. A push is live within about a
-minute.
+minute. Work happens on `feature/`, `bugfix/`, `docs/` or `chore/` branches
+created from `dev`; they are merged into `dev` and deleted, and `dev` is
+fast-forwarded into `main` to publish.
