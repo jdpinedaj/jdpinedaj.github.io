@@ -1,6 +1,7 @@
 """Pre-push checks for jdpinedaj.github.io. Stdlib only.
 
-Run: python3 check.py
+Run: python3 check.py            (everything, including external links)
+     python3 check.py --offline  (everything except the network link check)
 Exit code 0 when everything passes, 1 otherwise.
 """
 from __future__ import annotations
@@ -142,7 +143,9 @@ def tracked_text_files() -> list[Path]:
     ]
 
 
-def main() -> int:
+def main(argv: list[str] | None = None) -> int:
+    args = sys.argv[1:] if argv is None else argv
+    offline = "--offline" in args
     failures: list[str] = []
     html = INDEX.read_text(encoding="utf-8")
 
@@ -171,9 +174,10 @@ def main() -> int:
     for sentence in missing_sentences(html, SOURCES.read_text(encoding="utf-8")):
         failures.append(f"card sentence not in sources.md: {sentence}")
 
-    for url in external_links(html):
-        if not url_ok(url):
-            failures.append(f"link not reachable: {url}")
+    if not offline:
+        for url in external_links(html):
+            if not url_ok(url):
+                failures.append(f"link not reachable: {url}")
 
     for failure in failures:
         print("FAIL", failure)

@@ -129,5 +129,27 @@ class EmDash(unittest.TestCase):
         self.assertFalse(check.has_em_dash("a - b"))
 
 
+class MainChecks(unittest.TestCase):
+    """main() against the real files; the repository walk is stubbed to keep it fast."""
+
+    def run_main(self, argv):
+        with mock.patch.object(check, "tracked_text_files", return_value=[]):
+            with mock.patch.object(check, "url_ok", return_value=True) as url_ok:
+                with mock.patch("builtins.print"):
+                    check.main(argv)
+        return url_ok
+
+    def test_offline_skips_the_link_check(self):
+        url_ok = self.run_main(["--offline"])
+
+        url_ok.assert_not_called()
+
+    def test_online_checks_every_external_link(self):
+        url_ok = self.run_main([])
+
+        html = check.INDEX.read_text(encoding="utf-8")
+        self.assertEqual(url_ok.call_count, len(check.external_links(html)))
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -34,7 +34,7 @@ Before pushing:
 
 ```
 python3 -m unittest test_check
-python3 check.py
+python3 check.py            # add --offline to skip the network link check
 ```
 
 `check.py` fails on em-dashes, broken in-page anchors, unreachable external
