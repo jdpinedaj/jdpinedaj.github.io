@@ -15,7 +15,8 @@
 - Before a merge to `main`: `python3 -m unittest test_check` and
   `python3 check.py` (with the link check) both green, output quoted. That is
   the `/deploy` skill.
-- Commit and push only when Juan asks. `docs/superpowers/` (spec and plan) is
-  versioned on purpose; `TODO.md`, `shots/` and `.superpowers/` are not.
+- Commit and push only when Juan asks. Never versioned: `.claude/TODO.md`,
+  `.claude/superpowers/` (specs and plans), `shots/*.png`, `.superpowers/`.
+  The screenshot scripts in `shots/` are versioned.
 - One `git commit` at a time: the `.git` lock on `/mnt/c` fails under
   concurrent commits.

@@ -15,7 +15,8 @@ Run in order; do not report "deployed" until step 8 shows the new content.
 3. If the diff touches `index.html`, `styles.css` or `script.js`: `/shots` at
    375, 768 and 1280 in both themes, and the `page-reviewer` agent on the
    diff. Resolve its findings first.
-4. `TODO.md` (gitignored): remove what this branch closed, add what it opened.
+4. `.claude/TODO.md` (gitignored): remove what this branch closed, add what it
+   opened.
 5. Commits: plain subjects, no tool attribution. Squash nothing; the history
    is the log.
 6. Merge, fast-forward only:
@@ -33,4 +34,4 @@ Run in order; do not report "deployed" until step 8 shows the new content.
    ```
    The second number is 4. Open the URL in a browser for a layout change.
 9. Report: commits merged, check output, live verification, what remains in
-   `TODO.md`.
+   `.claude/TODO.md`.

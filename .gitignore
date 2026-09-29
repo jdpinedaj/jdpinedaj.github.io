@@ -1,9 +1,13 @@
 __pycache__/
-/shots/
 .superpowers/
-TODO.md
 
-# Local assistant overrides and inbox (not shared)
+# Screenshot tooling: scripts are versioned, output and dependencies are not
+/shots/*.png
+/shots/node_modules/
+
+# Local assistant material (not shared): work notes, specs and plans, overrides, inbox
+.claude/TODO.md
+.claude/superpowers/
 .claude/settings.local.json
 .claude/incoming_meetings/
 .claude/agent-memory-local/

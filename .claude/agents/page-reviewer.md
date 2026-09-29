@@ -10,7 +10,7 @@ Report findings ordered by severity with `file:line`, a one-sentence defect
 statement and how to see it (viewport, theme, keyboard step). If nothing is
 wrong, say so and list what you checked.
 
-The spec is `docs/superpowers/specs/2026-09-29-portfolio-site-design.md`.
+The spec is `.claude/superpowers/specs/2026-09-29-portfolio-site-design.md`.
 The verified claims are `sources.md`.
 
 Check every item:

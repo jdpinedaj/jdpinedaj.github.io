@@ -14,11 +14,12 @@ safe, and how to get in touch.
 - `styles.css`: theme tokens on `:root`, light and dark, layout, diagrams.
 - `script.js`: term-to-diagram highlighting, section tracking, theme toggle,
   card reveal. Under 100 lines. The page reads correctly without it.
-- `og-image.svg`: link preview image.
+- `og-image.png`: link preview image, rendered from `og-image.svg` (1200 by 630).
 - `JuanPineda_CV_AI_LLM.pdf`: the generic AI/LLM CV linked from the page.
 - `sources.md`: the verified claim lines the four system cards may use.
 - `check.py`: pre-push checks. `test_check.py`: unit tests for it.
-- `docs/superpowers/`: design spec and implementation plan.
+- `shots/`: Playwright scripts for screenshots and browser probes (development
+  only; `cd shots && npm install` once). Output PNGs are not versioned.
 
 ## Editing
 
@@ -39,6 +40,9 @@ python3 check.py            # add --offline to skip the network link check
 
 `check.py` fails on em-dashes, broken in-page anchors, unreachable external
 links, a missing CV PDF, and any card sentence that is not in `sources.md`.
+
+GitHub Actions runs the unit tests and the offline checks on every push and
+pull request, and the full link check once a week.
 
 ## Deploy
 

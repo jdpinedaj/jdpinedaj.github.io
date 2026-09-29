@@ -26,11 +26,12 @@ minutes). Clients named: Johnson & Johnson, Iberia Airlines, The People Platform
 python3 -m unittest test_check      # 19 tests, under a second
 python3 check.py --offline          # every check except external links
 python3 check.py                    # the same plus link reachability (network)
-node shots/shoot.js 375 shots/m.png [dark]   # screenshot (shots/ is gitignored)
+node shots/shoot.js 375 shots/m.png [dark]   # screenshot (PNGs are gitignored)
 ```
 
-The spec in `docs/superpowers/specs/2026-09-29-portfolio-site-design.md` is the
-reference for layout, tokens, metadata and out-of-scope items.
+The spec in `.claude/superpowers/specs/2026-09-29-portfolio-site-design.md` (kept
+out of git: it names the intermediaries the page does not) is the reference for
+layout, tokens, metadata and out-of-scope items.
 
 ## How to work here
 
@@ -42,4 +43,5 @@ reference for layout, tokens, metadata and out-of-scope items.
   Playbooks: `/check`, `/shots`, `/claim`, `/deploy`. Read-only reviewer: agent
   `page-reviewer`, run before calling a layout or content change done.
 - If a hook blocks an action, fix the cause; do not look for another way to run it.
-- `TODO.md` (gitignored) holds the open items and the decisions worth revisiting.
+- `.claude/TODO.md` (gitignored) holds the open items and the decisions worth
+  revisiting; `.claude/superpowers/` (gitignored) holds specs and plans.

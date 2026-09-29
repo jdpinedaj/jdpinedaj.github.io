@@ -33,8 +33,10 @@ check 2 main "$root/styles.css"
 check 2 main "$root/.claude/CLAUDE.md"
 check 2 master "$root/check.py"
 # Gitignored files never reach a commit, so they are editable on any branch.
-check 0 main "$root/TODO.md"
-check 0 main "$root/shots/shoot.js"
+check 0 main "$root/.claude/TODO.md"
+check 0 main "$root/.claude/superpowers/specs/x.md"
+check 0 main "$root/shots/mobile.png"
+check 2 main "$root/shots/shoot.js"
 check 0 main "$root/.claude/settings.local.json"
 # Working branches are free.
 check 0 chore/internal-structure "$root/index.html"

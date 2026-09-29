@@ -33,5 +33,7 @@ paths:
 - Metadata block (title, description, canonical, Open Graph with the PNG image,
   Twitter card, `rel="me"`, JSON-LD Person and WebSite) is complete; change one
   field everywhere it appears. `og:image` must stay a PNG or JPEG.
+- `og-image.svg` is the source of `og-image.png` (1200 by 630); regenerate the
+  PNG when the SVG changes. The meta tags point at the PNG.
 - After any layout change: `/shots` at 375, 768 and 1280 in both themes, then
   the `page-reviewer` agent.
