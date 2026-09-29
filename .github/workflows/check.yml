@@ -1,0 +1,39 @@
+name: Checks
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  schedule:
+    - cron: "0 7 * * 1"   # Mondays 07:00 UTC: external links
+  workflow_dispatch:
+
+jobs:
+  offline:
+    if: github.event_name != 'schedule'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Unit tests
+        run: python3 -m unittest test_check
+      - name: Page checks (no network)
+        run: python3 check.py --offline
+      - name: Hook tests
+        run: |
+          bash .claude/hooks/tests/test_guard_bash.sh
+          bash .claude/hooks/tests/test_guard_branch.sh
+          bash .claude/hooks/tests/test_no_em_dash.sh
+
+  links:
+    if: github.event_name == 'schedule' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Page checks including external links
+        run: python3 check.py
