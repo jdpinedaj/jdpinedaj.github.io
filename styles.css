@@ -197,7 +197,22 @@ main {
 
 /* Hero */
 
-.hero { padding: 72px 0 56px; }
+.hero {
+  padding: 72px 0 56px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 32px;
+  align-items: center;
+}
+
+.portrait {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  justify-self: end;
+}
 
 .hero h1 {
   font-size: clamp(2.2rem, 5vw, 3.4rem);
@@ -222,7 +237,7 @@ main {
   margin-bottom: 18px;
 }
 
-.hero-links a, .contact-links a {
+.hero-links a, .contact-links a, .profile-links a {
   display: inline-block;
   font-size: 0.92rem;
   color: var(--text);
@@ -232,7 +247,15 @@ main {
   padding: 7px 14px;
   transition: background .15s, color .15s;
 }
-.hero-links a:hover, .contact-links a:hover { background: var(--accent); color: #fff; }
+.hero-links a:hover, .contact-links a:hover, .profile-links a:hover { background: var(--accent); color: var(--bg); }
+
+.icon {
+  width: 1em;
+  height: 1em;
+  fill: currentColor;
+  vertical-align: -0.15em;
+  margin-right: 7px;
+}
 
 /* Cards */
 
@@ -436,8 +459,25 @@ main {
 
 /* Research */
 
-.pubs { list-style: none; padding: 0; }
-.pubs li { padding: 6px 0; }
+.topics {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+  max-width: 62ch;
+}
+.topics li {
+  font-size: 0.98rem;
+  padding: 7px 0;
+  border-top: 1px solid var(--line);
+}
+.topics li:first-child { border-top: 0; padding-top: 0; }
+
+.profile-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+}
 
 /* Contact */
 
@@ -462,7 +502,8 @@ main {
 
 @media (max-width: 760px) {
   body { font-size: 16px; }
-  .hero { padding: 48px 0 40px; }
+  .hero { padding: 48px 0 40px; grid-template-columns: 1fr; gap: 20px; }
+  .portrait { width: 112px; height: 112px; order: -1; justify-self: start; }
   .card { grid-template-columns: 1fr; gap: 20px; padding: 20px; }
   .card-diagram { position: static; }
   .grid-3 { grid-template-columns: 1fr; }
@@ -476,5 +517,5 @@ main {
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .js .card { opacity: 1; transform: none; transition: none; }
-  .term, .diagram .node rect, .hero-links a, .contact-links a { transition: none; }
+  .term, .diagram .node rect, .hero-links a, .contact-links a, .profile-links a { transition: none; }
 }

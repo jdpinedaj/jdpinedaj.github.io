@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script>(function(){var d=document.documentElement;d.classList.add("js");try{var t=localStorage.getItem("theme");if(t==="dark"||t==="light"){d.setAttribute("data-theme",t);}}catch(e){}})();</script>
   <title>Juan Pineda-Jaramillo, PhD | AI / LLM Engineer</title>
-  <meta name="description" content="Juan Pineda-Jaramillo, PhD, AI/LLM Engineer in Valencia, Spain. Production multi-agent systems, RAG over knowledge graphs, and the guardrail and evaluation layers that make them safe for regulated enterprises. Johnson & Johnson, Iberia Airlines, The People Platform.">
+  <meta name="description" content="Juan Pineda-Jaramillo, PhD, AI/LLM Engineer in Valencia, Spain. Production multi-agent systems, RAG over vector stores and enterprise inventories, and the guardrail and evaluation layers that make them safe for regulated enterprises. Johnson & Johnson, Iberia Airlines, The People Platform.">
   <meta name="author" content="Juan Pineda-Jaramillo">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://jdpinedaj.github.io/">
@@ -26,6 +26,7 @@
   <meta name="twitter:image" content="https://jdpinedaj.github.io/og-image.png">
   <link rel="me" href="https://www.linkedin.com/in/jdpinedaj/">
   <link rel="me" href="https://github.com/jdpinedaj">
+  <link rel="me" href="https://orcid.org/0000-0002-4657-7521">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -51,6 +52,7 @@
         "familyName": "Pineda-Jaramillo",
         "honorificSuffix": "PhD",
         "url": "https://jdpinedaj.github.io/",
+        "image": "https://jdpinedaj.github.io/photo.jpg",
         "email": "mailto:juandpineda@gmail.com",
         "jobTitle": "AI / LLM Engineer",
         "description": "AI/LLM Engineer with a PhD in applied machine learning, building production multi-agent systems, RAG and LLM governance for regulated enterprises.",
@@ -58,11 +60,13 @@
         "sameAs": [
           "https://www.linkedin.com/in/jdpinedaj/",
           "https://github.com/jdpinedaj",
-          "https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&hl=en"
+          "https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&hl=en",
+          "https://www.researchgate.net/profile/Juan-Pineda-Jaramillo",
+          "https://orcid.org/0000-0002-4657-7521"
         ],
         "knowsAbout": [
           "Multi-agent systems", "LangGraph", "Retrieval-augmented generation",
-          "Knowledge graphs", "LLM guardrails", "LLM evaluation", "Text2SQL",
+          "Hexagonal architecture", "LLM guardrails", "LLM evaluation", "Text2SQL",
           "Applied machine learning", "Transport and mobility analytics"
         ]
       }
@@ -78,38 +82,43 @@
     <a href="#systems">Systems</a>
     <a href="#governance">Governance</a>
     <a href="#track-record">Track record</a>
+    <a href="#research">Research</a>
     <a href="#contact">Contact</a>
     <button id="theme-toggle" type="button" aria-label="Switch theme">Theme</button>
   </nav>
 </header>
 <main id="top">
   <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-text">
     <p class="kicker">AI / LLM Engineer</p>
     <h1 id="hero-title">Juan Pineda-Jaramillo, PhD</h1>
     <p class="headline">Production multi-agent systems, RAG, and the governance layer that makes them safe enough for regulated enterprise use.</p>
-    <p class="lede">I'm an AI/LLM Engineer currently working for Johnson &amp; Johnson, building multi-agent systems in production. One of them cut an enterprise review process from a full working day down to about ten minutes. Before that I built Iberia Airlines' multi-agent customer service assistant. PhD in applied ML, 14 years in the field.</p>
+    <p class="lede">I'm an AI/LLM Engineer currently working for Johnson &amp; Johnson, building multi-agent systems in production. One of them cut an enterprise review process from a full working day down to about ten minutes. Before that I built four of the agents in Iberia Airlines' multi-agent customer service assistant. PhD in applied ML, 14 years in the field.</p>
     <p class="hero-links">
       <a href="mailto:juandpineda@gmail.com">juandpineda@gmail.com</a>
       <a href="https://www.linkedin.com/in/jdpinedaj/">LinkedIn</a>
       <a href="JuanPineda_CV_AI_LLM.pdf">CV (PDF)</a>
+      <a href="https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&amp;hl=en"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>Google Scholar</a>
     </p>
     <p class="hero-note">Valencia, Spain, working remotely.</p>
+    </div>
+    <img class="portrait" src="photo.jpg" width="640" height="640" alt="Juan Pineda-Jaramillo" decoding="async">
   </section>
 
   <section id="systems" class="section">
     <h2 class="section-title">Systems</h2>
-    <p class="lede">Four production systems. Each card shows how the system is put together and what keeps it safe. Hover a dotted term to find it in the diagram.</p>
+    <p class="lede">Four enterprise systems, three in production and one proof of concept on its way there. Each card shows how the system is put together and what keeps it safe. Hover a dotted term to find it in the diagram.</p>
 
     <article class="card" id="aria">
       <figure class="card-diagram">
         <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="aria-diagram-title">
-          <title id="aria-diagram-title">ARIA: intake flows into a LangGraph state machine, four domain agents on a shared engine exchange evidence over an A2A star, grounded in Neo4j and pgvector, producing a cited report inside a band of 19 guardrails.</title>
+          <title id="aria-diagram-title">ARIA: intake flows into a LangGraph state machine, four domain agents on a shared engine exchange evidence over an A2A star, grounded in the LeanIX inventory and pgvector, producing a cited report inside a band of 19 guardrails that warn and audit.</title>
           <defs>
             <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z"/></marker>
           </defs>
           <g class="node band" data-term="guardrails">
             <rect x="116" y="42" width="398" height="284"/>
-            <text x="122" y="34">19 guardrails at every node boundary</text>
+            <text x="122" y="34">19-guardrail framework, warn and audit</text>
           </g>
           <g class="node" data-term="intake">
             <rect x="8" y="170" width="100" height="56"/>
@@ -150,10 +159,10 @@
           </g>
           <path class="edge thin" d="M 306 226 L 306 262"/>
           <path class="edge thin" d="M 442 226 L 442 262"/>
-          <g class="node store" data-term="neo4j">
+          <g class="node store" data-term="inventory">
             <rect x="244" y="262" width="124" height="44"/>
-            <text x="306" y="280" text-anchor="middle">Neo4j</text>
-            <text x="306" y="295" text-anchor="middle" class="muted">LeanIX inventory</text>
+            <text x="306" y="280" text-anchor="middle">LeanIX inventory</text>
+            <text x="306" y="295" text-anchor="middle" class="muted">JSON; Neo4j parked</text>
           </g>
           <g class="node store" data-term="pgvector">
             <rect x="380" y="262" width="124" height="44"/>
@@ -166,7 +175,7 @@
             <text x="182" y="280" text-anchor="middle">cited report</text>
             <text x="182" y="295" text-anchor="middle" class="muted">scored, ~10 min</text>
           </g>
-          <text x="512" y="352" text-anchor="end" class="muted">every finding cites catalog source IDs</text>
+          <text x="512" y="352" text-anchor="end" class="muted">findings cite catalog source IDs; unresolved ones flagged</text>
         </svg>
       </figure>
       <div>
@@ -174,24 +183,24 @@
         <h3>ARIA, ARB Intake Verifier</h3>
         <dl class="card-text">
           <dt>Problem</dt>
-          <dd><span class="term" data-term="intake">It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams)</span>, reviews them against the enterprise standards library and returns a scored, fully cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.</dd>
+          <dd><span class="term" data-term="intake">It ingests solution-architecture submissions (PPTX, PDF, DOCX and diagrams)</span>, reviews them against the enterprise standards library and returns a scored, source-cited report, cutting a review that took a reviewer a full working day down to roughly 10 minutes.</dd>
           <dt>Architecture</dt>
           <dd><span class="term" data-term="agents">Four domain architect agents (Business, Technology, Information, Data Science &amp; AI)</span> run on a shared <span class="term" data-term="engine">quality-agent engine</span> orchestrated through <span class="term" data-term="graph">LangGraph state machines</span>, and only the domains the deck flags as architecturally impacted actually run.</dd>
           <dd>The agents negotiate missing evidence over an <span class="term" data-term="a2a">A2A protocol</span> (batched star topology, each peer answers once instead of N-by-N) and revise their own findings with what comes back.</dd>
-          <dd>Reasoning is grounded in the LeanIX enterprise architecture inventory (<span class="term" data-term="neo4j">Neo4j graph backend</span>) plus a <span class="term" data-term="pgvector">pgvector store</span> over the standards library; the agents assess slide diagrams directly as multimodal image input.</dd>
+          <dd>Reasoning is grounded in the LeanIX enterprise architecture inventory (<span class="term" data-term="inventory">JSON retrieval in production, a Neo4j text-to-Cypher retriever built and parked</span>) plus a <span class="term" data-term="pgvector">pgvector store</span> over the standards library; the agents assess slide diagrams directly as multimodal image input.</dd>
           <dt>Governance</dt>
-          <dd>Designed and implemented <span class="term" data-term="guardrails">19 production guardrails at every graph node</span>: prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run cost and token ceilings, among others. Every finding must cite catalog source IDs; citations are resolved against the catalog and ungrounded rows are dropped or flagged.</dd>
+          <dd>Designed and implemented <span class="term" data-term="guardrails">a 19-guardrail framework applied at graph-node boundaries and targeted points</span>, non-blocking by design (warn and audit, human in the loop): prompt injection, PII/PHI redaction (Presidio), data-exfiltration and prompt-leakage detection, schema and citation validation, per-run LLM-call and token ceilings, SHA-256 hashed audit trail, among others. Every finding is asked to cite catalog source IDs; citations are resolved against the catalog and unresolved ones are flagged.</dd>
           <dt>Outcome</dt>
           <dd><span class="term" data-term="report">A review that took a reviewer a full working day now takes about ten minutes.</span></dd>
         </dl>
-        <p class="stack">Python, LangGraph, LangChain, OpenAI Agents SDK, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, Neo4j, PostgreSQL + pgvector, SQLAlchemy, Docker</p>
+        <p class="stack">Python, LangGraph, LangChain, Azure OpenAI (GPT-5.x), FastAPI, Pydantic, PostgreSQL + pgvector, Neo4j, SQLAlchemy, Alembic, Docker, Helm</p>
       </div>
     </article>
 
     <article class="card" id="eva">
       <figure class="card-diagram">
         <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="eva-diagram-title">
-          <title id="eva-diagram-title">EVA: a customer message passes through a guardrail agent and a router to six domain agents, which call Iberia APIs and custom MCP servers, on top of OpenAI and AWS Bedrock models.</title>
+          <title id="eva-diagram-title">EVA: a customer message passes through the guardrail agent and a hexagonal router to the four agents Juan built (Translator, Check-in, Tone, Flight Status) inside a shared ecosystem of about fourteen agents, which call Iberia APIs through LangChain tools and keep conversation memory in DynamoDB, on Azure OpenAI and OpenAI models with AWS Bedrock as fallback.</title>
           <g class="node" data-term="user">
             <rect x="8" y="112" width="80" height="40"/>
             <text x="48" y="136" text-anchor="middle">customer</text>
@@ -202,48 +211,51 @@
             <text x="152" y="128" text-anchor="middle">Guardrail</text>
             <text x="152" y="143" text-anchor="middle" class="muted">agent</text>
           </g>
-          <text x="152" y="176" text-anchor="middle" class="muted">injection + exfiltration</text>
-          <text x="152" y="190" text-anchor="middle" class="muted">detectors</text>
+          <text x="152" y="176" text-anchor="middle" class="muted">prompt and config</text>
+          <text x="152" y="190" text-anchor="middle" class="muted">tuning, red-team harness</text>
           <path class="edge" d="M 202 132 L 216 132"/>
           <g class="node" data-term="router">
             <rect x="216" y="108" width="80" height="48"/>
             <text x="256" y="128" text-anchor="middle">router</text>
             <text x="256" y="143" text-anchor="middle" class="muted">hexagonal</text>
           </g>
-          <path class="edge" d="M 296 124 L 308 78"/>
-          <path class="edge" d="M 296 132 L 308 124"/>
-          <path class="edge" d="M 296 140 L 308 170"/>
+          <path class="edge" d="M 296 124 L 308 62"/>
+          <path class="edge" d="M 296 130 L 308 106"/>
+          <path class="edge" d="M 296 140 L 308 154"/>
+          <text x="308" y="36" class="label">built by Juan</text>
           <g class="node" data-term="agents">
-            <rect x="308" y="60" width="104" height="32"/>
-            <text x="360" y="80" text-anchor="middle">Check-in</text>
-            <rect x="412" y="60" width="104" height="32"/>
-            <text x="464" y="80" text-anchor="middle">Cancellation</text>
-            <rect x="308" y="108" width="104" height="32"/>
-            <text x="360" y="128" text-anchor="middle">Flight Status</text>
-            <rect x="412" y="108" width="104" height="32"/>
-            <text x="464" y="128" text-anchor="middle">Translator</text>
-            <rect x="308" y="156" width="104" height="32"/>
-            <text x="360" y="176" text-anchor="middle">Tone</text>
-            <rect x="412" y="156" width="104" height="32"/>
-            <text x="464" y="176" text-anchor="middle">Booking</text>
+            <rect x="308" y="44" width="104" height="32"/>
+            <text x="360" y="64" text-anchor="middle">Translator</text>
+            <rect x="412" y="44" width="104" height="32"/>
+            <text x="464" y="64" text-anchor="middle">Check-in</text>
+            <rect x="308" y="88" width="104" height="32"/>
+            <text x="360" y="108" text-anchor="middle">Tone</text>
+            <rect x="412" y="88" width="104" height="32"/>
+            <text x="464" y="108" text-anchor="middle">Flight Status</text>
           </g>
-          <path class="edge" d="M 360 188 L 360 232"/>
-          <path class="edge" d="M 464 188 L 464 232"/>
+          <g class="node" data-term="ecosystem">
+            <rect x="308" y="140" width="208" height="44"/>
+            <text x="412" y="158" text-anchor="middle" class="muted">shared ecosystem, ~14 agents</text>
+            <text x="412" y="173" text-anchor="middle" class="muted">intent, cancellation, docs, RAG</text>
+          </g>
+          <path class="edge" d="M 360 184 L 360 232"/>
+          <path class="edge" d="M 464 184 L 464 232"/>
           <g class="node store" data-term="apis">
             <rect x="308" y="232" width="104" height="44"/>
             <text x="360" y="250" text-anchor="middle">Iberia APIs</text>
-            <text x="360" y="265" text-anchor="middle" class="muted">internal</text>
+            <text x="360" y="265" text-anchor="middle" class="muted">LangChain tools</text>
           </g>
-          <g class="node store" data-term="mcp">
+          <g class="node store" data-term="memory">
             <rect x="412" y="232" width="104" height="44"/>
-            <text x="464" y="250" text-anchor="middle">MCP servers</text>
-            <text x="464" y="265" text-anchor="middle" class="muted">external</text>
+            <text x="464" y="250" text-anchor="middle">DynamoDB</text>
+            <text x="464" y="265" text-anchor="middle" class="muted">memory</text>
           </g>
-          <text x="102" y="312" class="label">model layer</text>
-          <path class="edge thin" d="M 256 320 L 256 156"/>
+          <text x="102" y="308" class="label">model layer</text>
+          <path class="edge thin" d="M 256 316 L 256 156"/>
           <g class="node" data-term="models">
-            <rect x="102" y="320" width="414" height="40"/>
-            <text x="309" y="344" text-anchor="middle">OpenAI and AWS Bedrock (Nova Pro)</text>
+            <rect x="102" y="316" width="414" height="48"/>
+            <text x="309" y="336" text-anchor="middle">Azure OpenAI and OpenAI</text>
+            <text x="309" y="352" text-anchor="middle" class="muted">AWS Bedrock fallback: Nova Pro, Claude</text>
           </g>
         </svg>
       </figure>
@@ -252,24 +264,24 @@
         <h3>EVA, Enhanced Virtual Assistant</h3>
         <dl class="card-text">
           <dt>Problem</dt>
-          <dd>Development of EVA (Enhanced Virtual Assistant), a multi-agent conversational ecosystem powered by LLMs to automate Iberia's customer service operations.</dd>
+          <dd>Development of EVA (Enhanced Virtual Assistant), a multi-agent conversational ecosystem powered by LLMs to automate Iberia's customer service operations. Built four of its agents (Translator, Check-in, Tone, Flight Status) and contributed to the guardrail agent.</dd>
           <dt>Architecture</dt>
-          <dd>Designed, tuned and deployed <span class="term" data-term="models">OpenAI and AWS Bedrock models</span> for production-grade airline assistants handling check-in, cancellations, flight status, flight documentation and other customer processes.</dd>
-          <dd>Built modular, <span class="term" data-term="router">hexagonal-architecture-based agents</span> <span class="term" data-term="agents">(Check-in, Cancellation, Flight Status, Translator, Tone, Booking, Guardrail)</span> using LangChain and FastAPI with structured I/O through Pydantic schemas.</dd>
-          <dd>Integrated multiple <span class="term" data-term="apis">Iberia APIs</span> and implemented secure, scalable interaction via internal tools and <span class="term" data-term="mcp">custom MCP servers</span> for external system access.</dd>
+          <dd>Built, tuned and deployed <span class="term" data-term="agents">the Translator, Check-in, Tone and Flight Status agents</span> on <span class="term" data-term="models">Azure OpenAI and OpenAI models (GPT-4.1, GPT-5.x) with AWS Bedrock (Nova Pro, Claude) as circuit-breaker fallback</span>, and benchmarked candidate models on cost, latency and output quality.</dd>
+          <dd>Built modular, <span class="term" data-term="router">hexagonal-architecture agents (ports and adapters, dependency injection)</span> within <span class="term" data-term="ecosystem">an ecosystem of about fourteen agents</span> (intent classification, guardrail, conversation manager, check-in, cancellation, flight status, flight documents, translator, tone, RAG) using LangChain and FastAPI with structured I/O through Pydantic schemas and <span class="term" data-term="memory">DynamoDB conversation memory</span>.</dd>
+          <dd>Integrated <span class="term" data-term="apis">Iberia's check-in and flight-status APIs as LangChain structured tools</span>, including an eleven-step check-in flow over eleven Iberia APIs, from reservation validation to boarding pass.</dd>
           <dt>Governance</dt>
-          <dd>Created <span class="term" data-term="guardrail">prompt-injection and data-exfiltration detectors</span> ensuring compliant and safe interactions.</dd>
+          <dd>Tuned the prompt and multi-model configuration of the <span class="term" data-term="guardrail">guardrail agent</span> and built a red-team harness with prompt-injection, data-exfiltration, prompt-leakage and jailbreak datasets against the assistant platform.</dd>
           <dt>Evaluation</dt>
-          <dd>Developed internal evaluation tools for LLM cost tracking, token efficiency, latency and output quality.</dd>
+          <dd>Load and regression testing of the assistant (Locust stress tests, a 1,000-prompt UAT battery), using the platform's per-call token, latency and cost tracking.</dd>
         </dl>
-        <p class="stack">Python, LangChain, OpenAI, AWS Bedrock (Nova Pro), FastAPI, Pydantic, DynamoDB, structlog, pytest, GitLab CI/CD</p>
+        <p class="stack">Python, LangChain, Azure OpenAI, OpenAI, AWS Bedrock (Nova Pro, Claude), FastAPI, Pydantic, DynamoDB, Kinesis Firehose, structlog, pytest, Locust, GitLab CI/CD, ECS Fargate</p>
       </div>
     </article>
 
     <article class="card" id="tpp">
       <figure class="card-diagram">
         <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="tpp-diagram-title">
-          <title id="tpp-diagram-title">TPP Text2SQL: four pipeline stages fed by session memory and FAISS examples, three guard layers underneath, every turn written to a PostgreSQL audit table.</title>
+          <title id="tpp-diagram-title">Numetrix (TPP) Text2SQL: four pipeline stages fed by session memory and FAISS examples, three guard layers underneath, every turn written to a PostgreSQL audit table.</title>
           <g class="node store" data-term="memory">
             <rect x="16" y="40" width="108" height="44"/>
             <text x="70" y="58" text-anchor="middle">memory</text>
@@ -318,7 +330,7 @@
             <text x="194" y="285" text-anchor="middle">classifier</text>
             <rect x="264" y="252" width="108" height="44"/>
             <text x="318" y="270" text-anchor="middle">read-only</text>
-            <text x="318" y="285" text-anchor="middle">SQL backstop</text>
+            <text x="318" y="285" text-anchor="middle">SQL validator</text>
           </g>
           <path class="edge" d="M 442 202 L 442 252"/>
           <g class="node store" data-term="audit">
@@ -326,90 +338,107 @@
             <text x="442" y="270" text-anchor="middle">PostgreSQL</text>
             <text x="442" y="285" text-anchor="middle" class="muted">audit table</text>
           </g>
-          <text x="16" y="340" class="muted">no perceptible added latency; every turn persisted</text>
+          <text x="16" y="340" class="muted">301-case regression suite, 25-case adversarial battery</text>
         </svg>
       </figure>
       <div>
-        <p class="kicker">The People Platform, mobility analytics</p>
-        <h3>TPP Text2SQL</h3>
+        <p class="kicker">The People Platform (Numetrix), mobility analytics</p>
+        <h3>Numetrix (TPP) Text2SQL</h3>
         <dl class="card-text">
           <dt>Problem</dt>
-          <dd>TPP Text2SQL: production conversational analytics platform over US foot-traffic and mobility data, letting business users run their own analyses in natural language instead of queueing for a data analyst who can write SQL.</dd>
+          <dd>Numetrix (TPP) Text2SQL: production conversational analytics platform over US foot-traffic and mobility data, letting business users run their own analyses in natural language instead of queueing for a data analyst who can write SQL.</dd>
           <dt>Architecture</dt>
           <dd>Four-stage hexagonal pipeline (<span class="term" data-term="extract">query extraction</span>, <span class="term" data-term="generate">context-aware SQL generation</span>, <span class="term" data-term="execute">secure execution</span>, <span class="term" data-term="transform">natural-language transformation</span>) with <span class="term" data-term="memory">session memory</span> and multi-turn follow-up resolution, plus <span class="term" data-term="faiss">FAISS semantic example selection</span> for few-shot SQL generation.</dd>
-          <dd>A case regression suite combining deterministic oracles with an LLM judge, pre-flight validation of extracted entities against the real catalogs, and every turn persisted to a <span class="term" data-term="audit">PostgreSQL audit table</span>.</dd>
-          <dd>Earlier work for the same client: scalable algorithms to map US mobility trends and identify home locations, an EMR-based processing pipeline over large geolocation datasets, and the first text2SQL agents (AWS Bedrock Titan, later OpenAI).</dd>
+          <dd>A 301-case regression suite (301/301 passing) combining deterministic oracles with an advisory LLM judge, an 18-case multi-turn follow-up corpus, pre-flight validation of extracted entities against catalog snapshots with fuzzy matching, and every turn persisted to a <span class="term" data-term="audit">PostgreSQL audit table</span> with per-stage timings.</dd>
+          <dd>Earlier work for the same client: a device home-location pipeline over tens of millions of devices a month (night-time location clustering, confidence scoring, demographic enrichment), first on AWS EMR and later on GCP Dataproc, Cloud SQL and BigQuery, and the first text2SQL agents (AWS Bedrock Titan, later OpenAI).</dd>
           <dt>Governance</dt>
-          <dd>Defence in depth: <span class="term" data-term="guards">regex input guard, a parallel LLM safety classifier adding no perceptible latency, a hardened read-only SQL backstop</span>.</dd>
+          <dd><span class="term" data-term="guards">A regex input guard, a parallel LLM safety classifier that adds no perceptible latency, and a read-only SQL validator that blocks DML/DDL, including writes hidden in CTEs</span>; validated with a 25-case adversarial battery (injection, jailbreak, exfiltration, obfuscation).</dd>
           <dt>Auditability</dt>
           <dd>Every turn persisted to a PostgreSQL audit table.</dd>
         </dl>
-        <p class="stack">Python, LangChain, OpenAI, FAISS, LangSmith, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL), Gemini</p>
+        <p class="stack">Python, LangChain, OpenAI, FAISS, Langfuse, PostgreSQL, BigQuery, GCS, Streamlit, Docker, Bitbucket Pipelines, PySpark, AWS (EMR, EC2, S3, RDS, Athena, Bedrock), GCP (Dataproc, Dataflow, Cloud Storage, Cloud SQL, Compute Engine)</p>
       </div>
     </article>
 
-    <article class="card" id="text2sql">
+    <article class="card" id="srs">
       <figure class="card-diagram">
-        <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="t2s-diagram-title">
-          <title id="t2s-diagram-title">Enterprise Text2SQL: one tool-calling agent that only knows an LLMPort and a DatabasePort; behind the ports sit Azure OpenAI or a scripted mock LLM, and a read-only validated database whose errors return to the agent as tool results.</title>
-          <text x="260" y="152" text-anchor="middle" class="muted">discovers the schema at runtime</text>
-          <g class="node" data-term="agent">
-            <rect x="200" y="170" width="120" height="56"/>
-            <text x="260" y="193" text-anchor="middle">tool-calling</text>
-            <text x="260" y="210" text-anchor="middle">agent</text>
+        <svg class="diagram" viewBox="0 0 520 400" role="img" aria-labelledby="srs-diagram-title">
+          <title id="srs-diagram-title">SRS Summarizer: a dashboard request goes to a read-only SQL fact engine that builds a fact sheet; versioned prompts and parallel model calls narrate the panels of each persona into JSON panels, inside LLM, database and trace ports, with every summary traced in Langfuse.</title>
+          <g class="node band" data-term="ports">
+            <rect x="128" y="42" width="386" height="342"/>
+            <text x="134" y="34">LLMPort, DatabasePort, TracePort</text>
           </g>
-          <path class="edge" d="M 200 198 L 150 198"/>
-          <g class="node" data-term="llmport">
-            <rect x="62" y="178" width="88" height="40"/>
-            <text x="106" y="202" text-anchor="middle">LLMPort</text>
+          <g class="node">
+            <rect x="8" y="150" width="96" height="56"/>
+            <text x="56" y="173" text-anchor="middle">request</text>
+            <text x="56" y="190" text-anchor="middle" class="muted">dashboard</text>
           </g>
-          <path class="edge thin" d="M 106 178 L 90 126"/>
-          <path class="edge thin" d="M 106 218 L 90 270"/>
-          <text x="84" y="80" text-anchor="middle" class="label">adapters</text>
+          <path class="edge" d="M 104 178 L 140 178"/>
+          <g class="node" data-term="facts">
+            <rect x="140" y="150" width="116" height="56"/>
+            <text x="198" y="173" text-anchor="middle">fact engine</text>
+            <text x="198" y="190" text-anchor="middle" class="muted">read-only SQL</text>
+          </g>
+          <path class="edge thin" d="M 198 206 L 198 250"/>
           <g class="node store">
-            <rect x="24" y="90" width="120" height="36"/>
-            <text x="84" y="112" text-anchor="middle">Azure OpenAI</text>
+            <rect x="140" y="250" width="116" height="44"/>
+            <text x="198" y="268" text-anchor="middle">Databricks SQL</text>
+            <text x="198" y="283" text-anchor="middle" class="muted">SQLite in tests</text>
           </g>
-          <g class="node store" data-term="mock">
-            <rect x="8" y="270" width="148" height="44"/>
-            <text x="82" y="288" text-anchor="middle">scripted mock LLM</text>
-            <text x="82" y="303" text-anchor="middle" class="muted">tests, no API spend</text>
+          <path class="edge" d="M 256 178 L 288 178"/>
+          <g class="node" data-term="facts">
+            <rect x="288" y="150" width="96" height="56"/>
+            <text x="336" y="173" text-anchor="middle">fact sheet</text>
+            <text x="336" y="190" text-anchor="middle" class="muted">every figure</text>
           </g>
-          <path class="edge" d="M 320 198 L 368 198"/>
-          <g class="node" data-term="dbport">
-            <rect x="368" y="178" width="104" height="40"/>
-            <text x="420" y="202" text-anchor="middle">DatabasePort</text>
+          <path class="edge" d="M 384 170 L 412 118"/>
+          <path class="edge" d="M 384 178 L 412 154"/>
+          <path class="edge" d="M 384 186 L 412 190"/>
+          <text x="412" y="94" class="label">in parallel</text>
+          <g class="node" data-term="narrate">
+            <rect x="412" y="104" width="100" height="28"/>
+            <text x="462" y="123" text-anchor="middle">CPO panels</text>
+            <rect x="412" y="140" width="100" height="28"/>
+            <text x="462" y="159" text-anchor="middle">VCL panels</text>
+            <rect x="412" y="176" width="100" height="28"/>
+            <text x="462" y="195" text-anchor="middle">CM panels</text>
           </g>
-          <path class="edge" d="M 420 218 L 420 244"/>
-          <g class="node" data-term="validation">
-            <rect x="340" y="244" width="160" height="40"/>
-            <text x="420" y="260" text-anchor="middle">read-only SQL check</text>
-            <text x="420" y="275" text-anchor="middle" class="muted">step budget, row caps</text>
+          <path class="edge thin" d="M 384 270 L 412 204"/>
+          <g class="node store" data-term="prompts">
+            <rect x="288" y="250" width="96" height="44"/>
+            <text x="336" y="268" text-anchor="middle">prompts</text>
+            <text x="336" y="283" text-anchor="middle" class="muted">YAML, pinned</text>
           </g>
-          <path class="edge" d="M 420 284 L 420 306"/>
-          <g class="node store" data-term="db">
-            <rect x="360" y="306" width="120" height="44"/>
-            <text x="420" y="324" text-anchor="middle">enterprise</text>
-            <text x="420" y="339" text-anchor="middle">database</text>
+          <path class="edge" d="M 462 204 L 462 250"/>
+          <g class="node" data-term="panels">
+            <rect x="412" y="250" width="100" height="44"/>
+            <text x="462" y="268" text-anchor="middle">JSON panels</text>
+            <text x="462" y="283" text-anchor="middle" class="muted">facts + text</text>
           </g>
-          <path class="edge" d="M 360 328 C 300 328, 260 300, 260 228"/>
-          <text x="300" y="366" text-anchor="middle" class="muted">errors return to the agent as tool results</text>
-          <text x="260" y="392" text-anchor="middle" class="muted">new database = a connection-string change</text>
+          <g class="node" data-term="trace">
+            <rect x="140" y="326" width="372" height="44"/>
+            <text x="326" y="344" text-anchor="middle">Langfuse trace, fail-open</text>
+            <text x="326" y="359" text-anchor="middle" class="muted">scope, facts, model, prompt version</text>
+          </g>
+          <text x="8" y="396" class="muted">compute first, narrate second</text>
         </svg>
       </figure>
       <div>
-        <p class="kicker">Johnson &amp; Johnson, self-serve analytics</p>
-        <h3>Enterprise Text2SQL Agent</h3>
+        <p class="kicker">Johnson &amp; Johnson, supply chain, proof of concept</p>
+        <h3>SRS Summarizer</h3>
         <dl class="card-text">
           <dt>Problem</dt>
-          <dd>Enterprise Text2SQL Agent: self-serve natural-language querying of enterprise databases, so business users get answers without depending on a SQL-fluent data analyst.</dd>
+          <dd>SRS Summarizer: LLM service that writes persona-specific narrative summaries (CPO, Value Chain Leader, Category Manager) of supply-disruption events for J&amp;J's Supply Risk Sensing dashboards; proof of concept heading to the DEV environment.</dd>
           <dt>Architecture</dt>
-          <dd><span class="term" data-term="agent">A single tool-calling agent</span> that discovers the schema at runtime, writes read-only SQL and recovers from its own errors by <span class="term" data-term="db">receiving database failures back as tool results</span>; onboarding a new database is a connection-string change, with zero schema-specific prompt engineering.</dd>
-          <dd>The agent depends only on <span class="term" data-term="llmport">LLMPort</span> and <span class="term" data-term="dbport">DatabasePort</span> contracts, so switching LLM vendor or database platform means writing an adapter.</dd>
+          <dd>Compute first, narrate second: <span class="term" data-term="facts">every figure is computed by deterministic read-only SQL into a fact sheet</span> and <span class="term" data-term="narrate">the model only narrates that fact sheet</span>; null facts are dropped before the call and out-of-scope events return a fixed message with no model call.</dd>
+          <dd>The service depends only on <span class="term" data-term="ports">LLMPort, DatabasePort and TracePort contracts</span>, with interchangeable OpenAI SDK and LangChain adapters and one SQL fact engine that runs on SQLite in tests and Databricks SQL in the target environment.</dd>
+          <dd>Contract-first FastAPI API with Pydantic schemas and an OpenAPI export; <span class="term" data-term="panels">the panels of a page share one fact sheet and their model calls run in parallel</span>.</dd>
           <dt>Governance</dt>
-          <dd><span class="term" data-term="validation">read-only SQL validation, step budget and row caps</span>, plus a full offline regression suite driven by a <span class="term" data-term="mock">scripted mock LLM</span> (no API spend).</dd>
+          <dd><span class="term" data-term="prompts">Prompts as versioned YAML</span> with a test that fails when a new prompt version is not pinned, and <span class="term" data-term="trace">fail-open Langfuse tracing</span> of scope, facts, narrative, model and prompt version for every summary.</dd>
+          <dt>Evaluation</dt>
+          <dd>98 offline pytest tests that run the real SQL against a synthetic fixture with a mock LLM.</dd>
         </dl>
-        <p class="stack">Python, Azure OpenAI, LangChain, SQLAlchemy, Pydantic, structlog, pytest</p>
+        <p class="stack">Python, FastAPI, Pydantic, SQLAlchemy, OpenAI, LangChain, Langfuse, Databricks SQL, pytest</p>
       </div>
     </article>
   </section>
@@ -441,9 +470,9 @@
       <div>
         <h3>Observability</h3>
         <ul>
-          <li>Tracing with Arize Phoenix, OpenTelemetry and LangSmith</li>
+          <li>Tracing with Arize Phoenix, OpenTelemetry, LangSmith and Langfuse</li>
           <li>Per-run token, latency and cost tracking</li>
-          <li>Structured logging, containerised FastAPI services, Kubernetes and Helm</li>
+          <li>Structured logging, containerised FastAPI services, Docker and Helm</li>
         </ul>
       </div>
     </div>
@@ -454,37 +483,47 @@
     <p class="lede">Fourteen years in the field, from transport engineering in Colombia to agentic systems in pharma.</p>
     <ul class="timeline">
       <li class="timeline-item"><span class="year">National University of Colombia</span><span class="label">Transport data science, Medell&iacute;n</span></li>
-      <li class="timeline-item"><span class="year">Antioquia and Medell&iacute;n</span><span class="label">Railway and transport planning</span></li>
+      <li class="timeline-item"><span class="year">Government of Antioquia, Medell&iacute;n City Hall, Antioquia Railway Department</span><span class="label">Railway and transport planning</span></li>
       <li class="timeline-item"><span class="year">MetroValencia, Logitren</span><span class="label">Train energy models, Spain</span></li>
       <li class="timeline-item"><span class="year">CFL Multimodal</span><span class="label">Rail disruption models, Luxembourg</span></li>
       <li class="timeline-item"><span class="year">Energage</span><span class="label">Churn prediction, US</span></li>
       <li class="timeline-item"><span class="year">Pirani Risk</span><span class="label">Anti-money-laundering, Colombia</span></li>
       <li class="timeline-item"><span class="year">Falabella.com</span><span class="label">Retail recommender, Chile</span></li>
       <li class="timeline-item"><span class="year">Codelco</span><span class="label">Mine optimisation, Chile</span></li>
-      <li class="timeline-item"><span class="year">The People Platform</span><span class="label">Mobility analytics, Text2SQL, US</span></li>
       <li class="timeline-item"><span class="year">Iberia Airlines</span><span class="label">Multi-agent customer service</span></li>
+      <li class="timeline-item"><span class="year">The People Platform (Numetrix)</span><span class="label">Mobility analytics, Text2SQL, US</span></li>
       <li class="timeline-item"><span class="year">Johnson &amp; Johnson</span><span class="label">Agentic systems, pharma</span></li>
     </ul>
-    <p class="hero-note">Earliest to most recent, as listed in the CV. Not to scale.</p>
     <ul class="engagements">
-      <li><span>Codelco, Chile</span><span>Recommendation system and mixed linear programming model to optimise operation of the Chuquicamata mine; Kedro pipelines on Azure Databricks.</span></li>
+      <li><span>Johnson &amp; Johnson, US</span><span>Pharmacovigilance risk model: an XGBoost classifier for late case reporting with SHAP explanations and LLM-described clusters, deployed in Databricks and retrained every two months.</span></li>
+      <li><span>The People Platform (Numetrix), US</span><span>Device home-location pipeline over tens of millions of devices a month, PySpark on AWS EMR and later GCP Dataproc, Cloud SQL and BigQuery.</span></li>
+      <li><span>Universitat Polit&egrave;cnica de Val&egrave;ncia, Spain</span><span>Acoustic monitoring of railway switches at MetroValencia with a Raspberry Pi and two microphones: impact detection and train-speed estimation from axle timing, paper in preparation.</span></li>
+      <li><span>Codelco, Chile</span><span>Recommendation system for the Chuquicamata mine: a mixed integer linear programming model assigning loaders to streets and extraction points per shift; Kedro pipelines on Azure Databricks.</span></li>
       <li><span>Falabella.com, Chile</span><span>Collaborative-filtering recommendation system with an automated pipeline from warehouse extraction to model deployment.</span></li>
       <li><span>Pirani Risk, Colombia</span><span>Anti-money-laundering product using PCA and Birch clustering over bank clients.</span></li>
       <li><span>Energage, US</span><span>Customer churn prediction model informing retention decisions.</span></li>
       <li><span>CFL Multimodal, Luxembourg</span><span>ML models predicting disruptions in rail intermodal operations across EU nations, with MLOps pipelines.</span></li>
       <li><span>MetroValencia and Logitren, Spain</span><span>Energy consumption prediction and optimisation for metro and freight trains.</span></li>
-      <li><span>Government of Antioquia and Medell&iacute;n, Colombia</span><span>Railway feasibility studies and the transport chapter of the regional development plan.</span></li>
+      <li><span>Government of Antioquia, Medell&iacute;n City Hall and Antioquia Railway Department, Colombia</span><span>Railway feasibility studies and the transport chapter of the regional development plan.</span></li>
     </ul>
   </section>
 
   <section id="research" class="section">
     <h2 class="section-title">Research</h2>
-    <p class="lede">PhD in applied machine learning, Universitat Polit&egrave;cnica de Val&egrave;ncia, cum laude. Postdoc at the University of Luxembourg. 56 peer-reviewed publications.</p>
-    <ul class="pubs">
-      <li><a href="https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&amp;hl=en">Google Scholar profile</a></li>
-      <li><a href="https://ieeexplore.ieee.org/abstract/document/10241468">Tourist satisfaction and transport systems (IEEE)</a></li>
-      <li><a href="https://doi.org/10.1016/j.trpro.2023.02.188">Urban metro satisfaction, topic modelling (Transportation Research Procedia)</a></li>
+    <p class="lede">PhD in applied machine learning, Universitat Polit&egrave;cnica de Val&egrave;ncia, cum laude. Postdoc at the University of Luxembourg. Peer-reviewed work on machine learning applied to transport:</p>
+    <ul class="topics">
+      <li>Travel demand and mode choice from household survey data</li>
+      <li>Energy consumption and traction power of metro and freight trains</li>
+      <li>Delay and disruption prediction in freight rail and aviation</li>
+      <li>Road safety and the severity of vehicle-pedestrian collisions</li>
+      <li>Traveller satisfaction from reviews, with topic modelling and NLP</li>
+      <li>Acoustic monitoring of railway switches (in preparation)</li>
     </ul>
+    <p class="profile-links">
+      <a href="https://scholar.google.com/citations?user=cnkQ4gMAAAAJ&amp;hl=en"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5.242 13.769L0 9.5 12 0l12 9.5-5.242 4.269C17.548 11.249 14.978 9.5 12 9.5c-2.977 0-5.548 1.748-6.758 4.269zM12 10a7 7 0 1 0 0 14 7 7 0 0 0 0-14z"/></svg>Google Scholar</a>
+      <a href="https://www.researchgate.net/profile/Juan-Pineda-Jaramillo"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M19.586 0c-.818 0-1.508.19-2.073.565-.563.377-.97.936-1.213 1.68a3.193 3.193 0 0 0-.112.437 8.365 8.365 0 0 0-.078.53 9 9 0 0 0-.05.727c-.01.282-.013.621-.013 1.016a31.121 31.123 0 0 0 .014 1.017 9 9 0 0 0 .05.727 7.946 7.946 0 0 0 .077.53h-.005a3.334 3.334 0 0 0 .113.438c.245.743.65 1.303 1.214 1.68.565.376 1.256.564 2.075.564.8 0 1.536-.213 2.105-.603.57-.39.94-.916 1.175-1.65.076-.235.135-.558.177-.93a10.9 10.9 0 0 0 .043-1.207v-.82c0-.095-.047-.142-.14-.142h-3.064c-.094 0-.14.047-.14.142v.956c0 .094.046.14.14.14h1.666c.056 0 .084.03.084.086 0 .36 0 .62-.036.865-.038.244-.1.447-.147.606-.108.385-.348.664-.638.876-.29.212-.738.35-1.187.35-.4 0-.76-.09-1.093-.325-.35-.236-.593-.51-.777-.949-.157-.377-.234-.86-.234-1.484 0-.9.04-1.63.11-2.13.09-.68.234-1.169.428-1.514.202-.336.482-.6.83-.775.35-.176.71-.264 1.08-.264.416 0 .78.104 1.087.304.31.2.55.484.72.87a.16.16 0 0 0 .14.09c.03 0 .06 0 .09-.02l1.05-.517c.048-.024.076-.06.08-.106.005-.047-.01-.09-.038-.13-.35-.61-.79-1.076-1.33-1.4C21.02.183 20.35 0 19.586 0zM7.01 2.94c-.026.09-.062.164-.098.212L3.85 3.9a.1.1 0 0 0-.03.014L.43 5.106c-.04.02-.05.05-.03.09l.1.267c.013.032.04.045.076.036l2.36-.78 3.16 7.59-1.87 3.884.012.015a.14.14 0 0 0 .1.06c.03.003.06 0 .09-.02l4.6-2.4a.15.15 0 0 0 .08-.13c.004-.06-.02-.11-.07-.14l-1.09-.8-1.81-3.62c.98-.44 1.86-.83 2.62-1.16 1.4-.62 2.14-.98 2.24-1.03l.05-.02c.04-.02.06-.05.06-.09 0-.02 0-.03-.01-.05L9.78 4.11 7.01 2.94zM5.8 5.47l.82-.37 1.9.71 1.13 2.53-1.76.79-1.77-3.5-.32-.16zm5.5 4.4l1.44 3.19-3.27 1.7 1.83-4.89z"/></svg>ResearchGate</a>
+      <a href="https://orcid.org/0000-0002-4657-7521"><svg class="icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg>ORCID</a>
+    </p>
   </section>
 
   <section id="contact" class="section contact">

@@ -18,7 +18,8 @@ already on the page: no rates, no intermediary names, no pitch material.
 
 Facts that are fixed: ARIA has four domain agents on one shared engine, never five.
 The only verified impact number is ARIA's (a full working day down to about ten
-minutes). Clients named: Johnson & Johnson, Iberia Airlines, The People Platform.
+minutes). SRS Summarizer is a proof of concept, not production, and is not agentic.
+Clients named: Johnson & Johnson, Iberia Airlines, The People Platform (Numetrix).
 
 ## Commands
 

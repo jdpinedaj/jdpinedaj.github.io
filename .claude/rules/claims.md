@@ -11,8 +11,8 @@ paths:
 - Never edit a line to make a card sentence pass `check.py`. The fix goes in
   `index.html`. If the card wording is better, change the master first (in the
   ai-job-hunt repo, with Juan), then copy the line here.
-- Keep the section headers per system (ARIA, EVA, TPP Text2SQL, Enterprise
-  Text2SQL) and the date line at the top updated when lines are added.
+- Keep the section headers per system (ARIA, EVA, Numetrix (TPP) Text2SQL,
+  SRS Summarizer) and the date line at the top updated when lines are added.
 - ARIA: four domain agents on one shared engine. The pitch bank wins over the
   CV master when they differ on ARIA.
 - No em-dashes; the checker scans this file too.

@@ -4,9 +4,9 @@ Portfolio of Juan Pineda-Jaramillo, PhD, AI / LLM Engineer. One hand-written
 page, no framework, no build step. Live at https://jdpinedaj.github.io/.
 
 The page is written for the tech lead or hiring manager who receives the link
-from an intermediary and has five minutes: what Juan builds, how four production
+from an intermediary and has five minutes: what Juan builds, how four enterprise
 systems are put together (architecture diagram per system), what keeps them
-safe, and how to get in touch.
+safe, what else he has built, and how to get in touch.
 
 ## Files
 
@@ -15,7 +15,9 @@ safe, and how to get in touch.
 - `script.js`: term-to-diagram highlighting, section tracking, theme toggle,
   card reveal. Under 100 lines. The page reads correctly without it.
 - `og-image.png`: link preview image, rendered from `og-image.svg` (1200 by 630).
-- `JuanPineda_CV_AI_LLM.pdf`: the generic AI/LLM CV linked from the page.
+- `JuanPineda_CV_AI_LLM.pdf`: the generic AI/LLM CV linked from the page,
+  exported from `JuanPineda_CV_AI_LLM.docx` (the editable source, kept in sync).
+- `photo.jpg`: the portrait in the hero, 640 by 640, also the JSON-LD image.
 - `sources.md`: the verified claim lines the four system cards may use.
 - `check.py`: pre-push checks. `test_check.py`: unit tests for it.
 - `shots/`: Playwright scripts for screenshots and browser probes (development
