@@ -10,6 +10,7 @@ import html as html_lib
 import re
 import sys
 import urllib.error
+import urllib.parse
 import urllib.request
 from pathlib import Path
 
@@ -98,6 +99,13 @@ def _default_opener(req: urllib.request.Request, timeout: float):
     return urllib.request.urlopen(req, timeout=timeout)
 
 
+BOT_BLOCKED_403_HOSTS = {"www.researchgate.net", "researchgate.net"}
+
+
+def _bot_blocked_host(url: str) -> bool:
+    return urllib.parse.urlsplit(url).hostname in BOT_BLOCKED_403_HOSTS
+
+
 def url_ok(url: str, opener=None, timeout: float = 10.0) -> bool:
     opener = opener or _default_opener
     headers = {"User-Agent": "Mozilla/5.0 (check.py; jdpinedaj.github.io)"}
@@ -108,8 +116,9 @@ def url_ok(url: str, opener=None, timeout: float = 10.0) -> bool:
             if 200 <= resp.status < 400:
                 return True
         except urllib.error.HTTPError as err:
-            if err.code == 999:
-                return True  # LinkedIn's anti-bot answer: the page exists, bots are refused
+            if err.code == 999 or (err.code == 403 and _bot_blocked_host(url)):
+                # Anti-bot answers (LinkedIn 999, ResearchGate 403): the page exists, bots are refused.
+                return True
             if err.code == 404 or method == "GET":
                 return False
         except (urllib.error.URLError, TimeoutError, OSError):

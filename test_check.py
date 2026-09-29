@@ -106,6 +106,18 @@ class LinkChecks(unittest.TestCase):
 
         self.assertTrue(check.url_ok("https://www.linkedin.com/in/x/", opener=opener))
 
+    def test_bot_block_403_counts_as_reachable(self):
+        def opener(req, timeout):
+            raise urllib.error.HTTPError(req.full_url, 403, "forbidden", {}, None)
+
+        self.assertTrue(check.url_ok("https://www.researchgate.net/profile/x", opener=opener))
+
+    def test_403_elsewhere_is_not_reachable(self):
+        def opener(req, timeout):
+            raise urllib.error.HTTPError(req.full_url, 403, "forbidden", {}, None)
+
+        self.assertFalse(check.url_ok("https://example.com/private", opener=opener))
+
     def test_url_not_ok_on_404(self):
         def opener(req, timeout):
             raise urllib.error.HTTPError(req.full_url, 404, "gone", {}, None)

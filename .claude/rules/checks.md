@@ -21,7 +21,8 @@ paths:
   lowercase, split on ". ", then require a clause boundary in the source line
   (`.:;` before, `.;` after). Do not loosen the boundary rule to make a card
   pass.
-- HTTP 999 (LinkedIn) counts as reachable; 404 on HEAD does not retry with GET.
+- HTTP 999 (LinkedIn) and 403 (ResearchGate) count as reachable; 404 on HEAD
+  does not retry with GET.
   Both are deliberate; `.claude/TODO.md` lists them as decisions to revisit.
 - Run with `python3 -m unittest test_check` (about a second) and
   `python3 check.py --offline`.
