@@ -18,6 +18,8 @@ SOURCES = ROOT / "sources.md"
 PDF = ROOT / "JuanPineda_CV_AI_LLM.pdf"
 TEXT_SUFFIXES = {".html", ".css", ".js", ".md", ".py", ".svg", ".txt"}
 EM_DASH = chr(0x2014)
+MIN_CARD_BLOCKS = 4
+MIN_CARD_SENTENCES = 20
 
 
 def normalise(text: str) -> str:
@@ -27,11 +29,21 @@ def normalise(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip().lower()
 
 
+CARD_BLOCK = re.compile(r'<dl\b[^>]*class="[^"]*\bcard-text\b[^"]*"[^>]*>(.*?)</dl>', re.S)
+DD = re.compile(r"<dd\b[^>]*>(.*?)</dd>", re.S)
+BOUNDARY_BEFORE = ".:;"
+BOUNDARY_AFTER = ".;"
+
+
+def card_blocks(html: str) -> int:
+    return len(CARD_BLOCK.findall(html))
+
+
 def card_sentences(html: str) -> list[str]:
     """Every sentence inside a <dd> within a <dl class="card-text">."""
     sentences: list[str] = []
-    for block in re.findall(r'<dl class="card-text">(.*?)</dl>', html, re.S):
-        for dd in re.findall(r"<dd>(.*?)</dd>", block, re.S):
+    for block in CARD_BLOCK.findall(html):
+        for dd in DD.findall(block):
             for piece in normalise(dd).split(". "):
                 piece = piece.strip().rstrip(".").strip()
                 if piece:
@@ -39,9 +51,29 @@ def card_sentences(html: str) -> list[str]:
     return sentences
 
 
+def sentence_in_sources(sentence: str, lines: list[str]) -> bool:
+    """True when the sentence sits on a clause boundary of one source line.
+
+    A match must start at the line start or after '.', ':' or ';' and end at
+    the line end or before '.' or ';'. That accepts a claim that follows a
+    'Label:' prefix and rejects a truncated sentence.
+    """
+    for line in lines:
+        start = line.find(sentence)
+        while start != -1:
+            before = line[:start].rstrip()
+            after = line[start + len(sentence):].lstrip()
+            ok_before = before == "" or before[-1] in BOUNDARY_BEFORE
+            ok_after = after == "" or after[0] in BOUNDARY_AFTER
+            if ok_before and ok_after:
+                return True
+            start = line.find(sentence, start + 1)
+    return False
+
+
 def missing_sentences(html: str, sources: str) -> list[str]:
-    haystack = normalise(sources)
-    return [s for s in card_sentences(html) if s not in haystack]
+    lines = [normalise(line) for line in sources.splitlines() if line.strip()]
+    return [s for s in card_sentences(html) if not sentence_in_sources(s, lines)]
 
 
 def anchor_targets(html: str) -> list[str]:
@@ -75,12 +107,22 @@ def url_ok(url: str, opener=None, timeout: float = 10.0) -> bool:
             if 200 <= resp.status < 400:
                 return True
         except urllib.error.HTTPError as err:
+            if err.code == 999:
+                return True  # LinkedIn's anti-bot answer: the page exists, bots are refused
             if err.code == 404 or method == "GET":
                 return False
         except (urllib.error.URLError, TimeoutError, OSError):
             if method == "GET":
                 return False
     return False
+
+
+def og_image_path(html: str) -> str | None:
+    """Local filename of the og:image, or None when it is not a raster image."""
+    m = re.search(r'<meta property="og:image" content="[^"]*/([^"/]+)"', html)
+    if not m or not m.group(1).lower().endswith((".png", ".jpg", ".jpeg")):
+        return None
+    return m.group(1)
 
 
 def has_em_dash(text: str) -> bool:
@@ -108,12 +150,24 @@ def main() -> int:
         if has_em_dash(path.read_text(encoding="utf-8")):
             failures.append(f"em-dash in {path.relative_to(ROOT)}")
 
+    og = og_image_path(html)
+    if og is None:
+        failures.append("og:image must be a PNG or JPEG (chat clients do not unfurl SVG)")
+    elif not (ROOT / og).exists():
+        failures.append(f"og:image file missing: {og}")
+
     for anchor in missing_anchors(html):
         failures.append(f"anchor without target: {anchor}")
 
     if not PDF.exists() or PDF.stat().st_size < 10_000:
         failures.append(f"missing or too small: {PDF.name}")
 
+    blocks = card_blocks(html)
+    if blocks < MIN_CARD_BLOCKS:
+        failures.append(f"only {blocks} card-text block(s) found, expected {MIN_CARD_BLOCKS}")
+    sentences = card_sentences(html)
+    if len(sentences) < MIN_CARD_SENTENCES:
+        failures.append(f"only {len(sentences)} card sentence(s) found, expected at least {MIN_CARD_SENTENCES}")
     for sentence in missing_sentences(html, SOURCES.read_text(encoding="utf-8")):
         failures.append(f"card sentence not in sources.md: {sentence}")
 

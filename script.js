@@ -15,11 +15,11 @@
       }
       el.addEventListener("mouseenter", function () { set(true); });
       el.addEventListener("mouseleave", function () { set(false); });
+      if (!el.classList.contains("term")) return;
+      // Text terms only: a focus listener on an SVG node makes it a tab stop in Chromium.
       el.addEventListener("focus", function () { set(true); });
       el.addEventListener("blur", function () { set(false); });
-      if (el.classList.contains("term") && !el.hasAttribute("tabindex")) {
-        el.setAttribute("tabindex", "0");
-      }
+      if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "0");
     });
   }
 

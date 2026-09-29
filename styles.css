@@ -245,11 +245,13 @@ main {
   border-radius: var(--radius);
   padding: 28px;
   margin-bottom: 28px;
+}
+.js .card {
   opacity: 0;
   transform: translateY(12px);
   transition: opacity .5s ease, transform .5s ease;
 }
-.card.is-visible { opacity: 1; transform: none; }
+.js .card.is-visible { opacity: 1; transform: none; }
 
 .card h3 {
   font-size: 1.5rem;
@@ -305,7 +307,7 @@ main {
 
 /* Diagrams */
 
-.diagram { font-family: var(--font-mono); font-size: 13px; }
+.diagram { font-family: var(--font-mono); font-size: 12px; }
 .diagram .node rect {
   fill: var(--surface-soft);
   stroke: var(--line);
@@ -338,7 +340,7 @@ main {
 .diagram .store rect { rx: 4; }
 .diagram .hub circle { fill: var(--accent); }
 .diagram .hub.is-active .edge, .diagram .hub:hover .edge { stroke: var(--accent); }
-.diagram .muted { fill: var(--muted); font-size: 11px; }
+.diagram .muted { fill: var(--muted); font-size: 10.5px; }
 .diagram #arrow path { fill: var(--muted); }
 
 /* Governance */
@@ -371,14 +373,15 @@ main {
   padding: 0;
   margin: 8px 0 12px;
   display: flex;
-  gap: 0;
+  flex-wrap: wrap;
+  gap: 20px 0;
   overflow-x: auto;
   scrollbar-width: thin;
   padding-bottom: 8px;
 }
 .timeline-item {
-  flex: 1 1 0;
-  min-width: 100px;
+  flex: 0 0 16.66%;
+  min-width: 0;
   position: relative;
   padding: 22px 12px 0 0;
 }
@@ -409,6 +412,7 @@ main {
   margin-bottom: 4px;
 }
 .timeline-item .label { font-size: 0.88rem; color: var(--text); }
+.timeline-item .year, .timeline-item .label { display: block; }
 
 .engagements {
   list-style: none;
@@ -463,13 +467,14 @@ main {
   .card-diagram { position: static; }
   .grid-3 { grid-template-columns: 1fr; }
   .engagements li { grid-template-columns: 1fr; gap: 4px; }
-  .timeline-item { flex: 0 0 132px; }
+  .timeline { flex-wrap: nowrap; }
+  .timeline-item { flex: 0 0 140px; }
   .site-header { position: static; }
   .section { padding-top: 40px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .card { opacity: 1; transform: none; transition: none; }
+  .js .card { opacity: 1; transform: none; transition: none; }
   .term, .diagram .node rect, .hero-links a, .contact-links a { transition: none; }
 }
