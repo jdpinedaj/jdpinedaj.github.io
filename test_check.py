@@ -88,6 +88,10 @@ class LinkChecks(unittest.TestCase):
         html = '<link rel="preconnect" href="https://fonts.gstatic.com"><a href="https://example.com/b">b</a>'
         self.assertEqual(check.external_links(html), ["https://example.com/b"])
 
+    def test_external_links_unescape_entities(self):
+        html = '<a href="https://example.com/c?user=x&amp;hl=en">c</a>'
+        self.assertEqual(check.external_links(html), ["https://example.com/c?user=x&hl=en"])
+
     def test_head_falls_back_to_get(self):
         calls = []
 
@@ -118,6 +122,24 @@ class LinkChecks(unittest.TestCase):
 
         self.assertFalse(check.url_ok("https://example.com/private", opener=opener))
 
+    def test_scholar_rate_limit_counts_as_reachable(self):
+        def opener(req, timeout):
+            raise urllib.error.HTTPError(req.full_url, 429, "too many requests", {}, None)
+
+        self.assertTrue(check.url_ok("https://scholar.google.com/citations?user=x", opener=opener))
+
+    def test_scholar_404_is_not_reachable(self):
+        def opener(req, timeout):
+            raise urllib.error.HTTPError(req.full_url, 404, "gone", {}, None)
+
+        self.assertFalse(check.url_ok("https://scholar.google.com/citations?user=x", opener=opener))
+
+    def test_failure_detail_names_the_status(self):
+        def opener(req, timeout):
+            raise urllib.error.HTTPError(req.full_url, 410, "gone", {}, None)
+
+        self.assertEqual(check.url_status("https://example.com/x", opener=opener), (False, "HTTP 410"))
+
     def test_url_not_ok_on_404(self):
         def opener(req, timeout):
             raise urllib.error.HTTPError(req.full_url, 404, "gone", {}, None)
@@ -146,10 +168,10 @@ class MainChecks(unittest.TestCase):
 
     def run_main(self, argv):
         with mock.patch.object(check, "tracked_text_files", return_value=[]):
-            with mock.patch.object(check, "url_ok", return_value=True) as url_ok:
+            with mock.patch.object(check, "url_status", return_value=(True, "HTTP 200")) as url_status:
                 with mock.patch("builtins.print"):
                     check.main(argv)
-        return url_ok
+        return url_status
 
     def test_offline_skips_the_link_check(self):
         url_ok = self.run_main(["--offline"])

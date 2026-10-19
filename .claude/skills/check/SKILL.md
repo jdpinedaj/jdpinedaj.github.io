@@ -18,8 +18,9 @@ What each failure means:
 - `anchor without target`: a header link or in-page link points to a missing
   `id`.
 - `link not reachable`: retry once; if it still fails, check the URL by hand
-  before changing it (LinkedIn answers 999 and ResearchGate 403; both count as
-  reachable).
+  before changing it. The message names the status. LinkedIn 999, ResearchGate
+  403 and Google Scholar 403/429 count as reachable (bot blocks, Scholar blocks
+  the CI runners).
 - `og:image ...`: the preview image must be the PNG and must exist.
 - `missing or too small: JuanPineda_CV_AI_LLM.pdf`: the CV was moved or
   replaced by a placeholder.

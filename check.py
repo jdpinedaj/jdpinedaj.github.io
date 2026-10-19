@@ -89,7 +89,8 @@ def missing_anchors(html: str) -> list[str]:
 
 def external_links(html: str) -> list[str]:
     seen: list[str] = []
-    for url in re.findall(r'<a\s[^>]*href="(https?://[^"]+)"', html):
+    for raw in re.findall(r'<a\s[^>]*href="(https?://[^"]+)"', html):
+        url = html_lib.unescape(raw)
         if url not in seen:
             seen.append(url)
     return seen
@@ -99,32 +100,49 @@ def _default_opener(req: urllib.request.Request, timeout: float):
     return urllib.request.urlopen(req, timeout=timeout)
 
 
-BOT_BLOCKED_403_HOSTS = {"www.researchgate.net", "researchgate.net"}
+# Hosts that refuse bots, and CI runners in particular, with these codes while the page
+# exists for a browser: ResearchGate answers 403 to every client, Google Scholar answers
+# 429 or 403 to datacenter IPs (the weekly GitHub Actions run). A 404 still fails.
+BOT_BLOCKED_CODES = {
+    "www.researchgate.net": {403},
+    "researchgate.net": {403},
+    "scholar.google.com": {403, 429},
+}
 
 
-def _bot_blocked_host(url: str) -> bool:
-    return urllib.parse.urlsplit(url).hostname in BOT_BLOCKED_403_HOSTS
+def _bot_blocked(url: str, code: int) -> bool:
+    if code == 999:  # LinkedIn's anti-bot answer
+        return True
+    return code in BOT_BLOCKED_CODES.get(urllib.parse.urlsplit(url).hostname or "", set())
 
 
-def url_ok(url: str, opener=None, timeout: float = 10.0) -> bool:
+def url_status(url: str, opener=None, timeout: float = 10.0) -> tuple[bool, str]:
+    """(reachable, detail). HEAD first, GET as fallback; the detail names the last answer."""
     opener = opener or _default_opener
     headers = {"User-Agent": "Mozilla/5.0 (check.py; jdpinedaj.github.io)"}
+    detail = "no answer"
     for method in ("HEAD", "GET"):
         req = urllib.request.Request(url, method=method, headers=headers)
         try:
             resp = opener(req, timeout)
+            detail = f"HTTP {resp.status}"
             if 200 <= resp.status < 400:
-                return True
+                return True, detail
         except urllib.error.HTTPError as err:
-            if err.code == 999 or (err.code == 403 and _bot_blocked_host(url)):
-                # Anti-bot answers (LinkedIn 999, ResearchGate 403): the page exists, bots are refused.
-                return True
+            detail = f"HTTP {err.code}"
+            if _bot_blocked(url, err.code):
+                return True, detail
             if err.code == 404 or method == "GET":
-                return False
-        except (urllib.error.URLError, TimeoutError, OSError):
+                return False, detail
+        except (urllib.error.URLError, TimeoutError, OSError) as err:
+            detail = type(err).__name__
             if method == "GET":
-                return False
-    return False
+                return False, detail
+    return False, detail
+
+
+def url_ok(url: str, opener=None, timeout: float = 10.0) -> bool:
+    return url_status(url, opener, timeout)[0]
 
 
 def og_image_path(html: str) -> str | None:
@@ -185,8 +203,9 @@ def main(argv: list[str] | None = None) -> int:
 
     if not offline:
         for url in external_links(html):
-            if not url_ok(url):
-                failures.append(f"link not reachable: {url}")
+            ok, detail = url_status(url)
+            if not ok:
+                failures.append(f"link not reachable ({detail}): {url}")
 
     for failure in failures:
         print("FAIL", failure)
