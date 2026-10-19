@@ -9,9 +9,7 @@
       var term = el.getAttribute("data-term");
       var peers = card.querySelectorAll('[data-term="' + term + '"]');
       function set(on) {
-        Array.prototype.forEach.call(peers, function (p) {
-          p.classList.toggle("is-active", on);
-        });
+        Array.prototype.forEach.call(peers, function (p) { p.classList.toggle("is-active", on); });
       }
       el.addEventListener("mouseenter", function () { set(true); });
       el.addEventListener("mouseleave", function () { set(false); });
@@ -28,15 +26,11 @@
     var sections = document.querySelectorAll("section[id]");
     if (!("IntersectionObserver" in window) || !links.length) return;
     var byId = {};
-    Array.prototype.forEach.call(links, function (a) {
-      byId[a.getAttribute("href").slice(1)] = a;
-    });
+    Array.prototype.forEach.call(links, function (a) { byId[a.getAttribute("href").slice(1)] = a; });
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
         if (!entry.isIntersecting) return;
-        Array.prototype.forEach.call(links, function (a) {
-          a.removeAttribute("aria-current");
-        });
+        Array.prototype.forEach.call(links, function (a) { a.removeAttribute("aria-current"); });
         var link = byId[entry.target.id];
         if (link) link.setAttribute("aria-current", "true");
       });
@@ -85,7 +79,17 @@
     });
   }
 
+  // "in the field since 2012" stays true without JS; with JS it becomes "<n> years in the field".
+  function yearsInField() {
+    var year = new Date().getFullYear();
+    Array.prototype.forEach.call(document.querySelectorAll("[data-since][data-text]"), function (el) {
+      var n = year - parseInt(el.getAttribute("data-since"), 10);
+      if (n > 0) el.textContent = el.getAttribute("data-text").replace("{n}", n);
+    });
+  }
+
   document.addEventListener("DOMContentLoaded", function () {
+    yearsInField();
     highlightTerms();
     trackSections();
     revealCards();

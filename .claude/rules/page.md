@@ -27,6 +27,9 @@ paths:
   adding a literal colour.
 - Layout works at 375 px with 16 px gutters and no horizontal scroll, and at
   768 px. `prefers-reduced-motion` disables the card fade-in.
+- No hard-coded tenure. A "years in the field" figure is
+  `<span data-since="2012" data-text="{n} years in the field">in the field since 2012</span>`:
+  the fallback stays true without JS and `script.js` fills in the current count.
 - `script.js` stays under 100 lines, dependency-free, wrapped in an IIFE, and
   every function returns early when its element is missing. The page must read
   correctly with JS disabled (cards visible, anchors work, theme follows system).
